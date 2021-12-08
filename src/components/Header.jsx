@@ -4,7 +4,7 @@ import profileIcon from '../images/profileIcon.svg';
 function Header() {
   return (
     <header>
-      <h1 data-testid="page-title"> Header </h1>
+      <h1 data-testid="page-title"> Header! </h1>
       <input
         data-testid="search-top-btn"
         type="text"
