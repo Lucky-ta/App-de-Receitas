@@ -1,11 +1,11 @@
 import React from 'react';
 
-function DrinkProcess() {
+function DrinksRecipesInProgress() {
   return (
     <div>
-      DrinkProcess Page
+      DrinksRecipesInProgress Page
     </div>
   );
 }
 
-export default DrinkProcess;
+export default DrinksRecipesInProgress;
