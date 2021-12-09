@@ -3,10 +3,10 @@ import Header from '../components/Header';
 
 function Drinks() {
   return (
-    <main>
-      <Header />
-      <h1 data-testid="explore"> Explore </h1>
-    </main>
+    <div>
+      <Header title="Bebidas" isRender />
+      Drink Page
+    </div>
   );
 }
 
