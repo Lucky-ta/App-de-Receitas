@@ -22,7 +22,6 @@ function Header({ title, isRender }) {
           alt="profileIcon"
           onClick={ profileRedirect }
         />
-        <h1 data-testid="page-title">{ title }</h1>
         { isRender && (
           <input
             data-testid="search-top-btn"
@@ -35,7 +34,7 @@ function Header({ title, isRender }) {
         { search && (
           <input data-testid="search-input" type="text" />
         )}
-
+        <h1 data-testid="page-title">{ title }</h1>
       </header>
     </div>
   );

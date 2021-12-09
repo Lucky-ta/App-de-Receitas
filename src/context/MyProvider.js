@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
+import foodApiToSelect from '../services/searchMeals';
+import drinkApiToSelect from '../services/searchDrinks';
 
 function Provider({ children }) {
-  const [state, setState] = useState();
+  const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   const data = {
-    state,
-    setState,
+    meals,
+    setMeals,
+    drinks,
+    setDrinks,
   };
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const response = await foodApiToSelect('ALL');
+      setMeals(response.meals);
+    };
+    fetchApi();
+  }, []);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const response = await drinkApiToSelect('ALL');
+      setDrinks(response.drinks);
+    };
+    fetchApi();
+  }, []);
 
   return (
     <MyContext.Provider value={ data }>
