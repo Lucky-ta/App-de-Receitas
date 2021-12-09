@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 
 function Provider({ children }) {
-  const INITIAL_STATE = {};
-  const [state, setState] = useState(INITIAL_STATE);
+  const [state, setState] = useState();
 
   const data = {
     state,
