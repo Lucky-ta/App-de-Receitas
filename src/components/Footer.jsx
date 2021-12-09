@@ -1,15 +1,15 @@
 import React from 'react';
 import '../index.css';
+import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
-import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
     <div>
       <footer data-testid="footer">
-        <Link to='/bebidas'>
+        <Link to="/bebidas">
           <input
             type="image"
             data-testid="drinks-bottom-btn"
@@ -18,7 +18,7 @@ function Footer() {
           />
         </Link>
 
-        <Link to='/explorar'>
+        <Link to="/explorar">
           <input
             type="image"
             data-testid="explore-bottom-btn"
@@ -27,7 +27,7 @@ function Footer() {
           />
         </Link>
 
-        <Link to='/comidas'>
+        <Link to="/comidas">
           <input
             type="image"
             data-testid="food-bottom-btn"
@@ -39,6 +39,4 @@ function Footer() {
     </div>
   );
 }
-
-
 export default Footer;
