@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Header from '../pages/Foods';
 import Login from '../pages/Login';
 import Drinks from '../pages/Drinks';
 import DrinksRecipesInProgress from '../pages/DrinksRecipesInProgress';
@@ -20,6 +21,7 @@ import RecipesDone from '../pages/RecipesDone';
 function Routes() {
   return (
     <Switch>
+      <Route path="/comidas" component={ Header } />
       <Route exact path="/" component={ Login } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/explorar/comidas" component={ ExploreMeals } />
