@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
 
-function DrinksRecipesInProgress() {
+function DrinkProcess() {
   return (
-    <main>
-      <Header />
-      <h1 data-testid="explore"> Explore </h1>
-    </main>
+    <div>
+      DrinkProcess Page
+    </div>
   );
 }
 
-export default DrinksRecipesInProgress;
+export default DrinkProcess;

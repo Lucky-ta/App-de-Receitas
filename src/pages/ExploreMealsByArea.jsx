@@ -3,10 +3,10 @@ import Header from '../components/Header';
 
 function ExploreMealsByArea() {
   return (
-    <main>
-      <Header />
-      <h1 data-testid="explore"> Explore </h1>
-    </main>
+    <div>
+      <Header title="Explorar Origem" isRender />
+      ExploreMealsByArea Page
+    </div>
   );
 }
 

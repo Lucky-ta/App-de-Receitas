@@ -12,9 +12,7 @@ function Provider({ children }) {
   };
 
   return (
-    <MyContext.Provider
-      value={ data }
-    >
+    <MyContext.Provider value={ data }>
       { children }
     </MyContext.Provider>
   );
