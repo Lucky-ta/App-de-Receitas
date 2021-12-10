@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function AppCards({ index, src, name }) {
-  console.log(src);
   return (
     <div data-testid={ `${index}-recipe-card` }>
       <img data-testid={ `${index}-card-img` } src={ src } alt={ name } />

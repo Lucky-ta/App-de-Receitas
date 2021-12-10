@@ -8,14 +8,10 @@ function Drinks() {
 
   const TWELVE = 12;
 
-  if (result.length >= TWELVE) {
-    result.splice(0, TWELVE + 1);
-  }
-
   return (
     <div>
       <Header title="Bebidas" isRender />
-      { result.map(({ strDrink, strDrinkThumb }, index) => (
+      { result.slice(0, TWELVE).map(({ strDrink, strDrinkThumb }, index) => (
         <AppCards key={ index } name={ strDrink } src={ strDrinkThumb } index={ index } />
       )) }
     </div>
