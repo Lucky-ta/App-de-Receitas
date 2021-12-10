@@ -32,7 +32,10 @@ function Header({ title, isRender }) {
           />
         )}
         { search && (
-          <input data-testid="search-input" type="text" />
+          <div>
+            <p />
+            <input data-testid="search-input" type="text" />
+          </div>
         )}
         <h1 data-testid="page-title">{ title }</h1>
       </header>
