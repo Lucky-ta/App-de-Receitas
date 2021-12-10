@@ -5,7 +5,6 @@ import { MAX_CARDS } from '../global/constants';
 
 function MealCards() {
   const { meals } = useContext(MyContext);
-
   const history = useHistory();
 
   function showCards() {
@@ -23,10 +22,17 @@ function MealCards() {
             <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
           </div>
         </Link>
-      )));
+      ))
+    );
   }
 
   function goToFood() {
+    if (meals === null) {
+      return global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+
     if (meals.length === 1) {
       const { idMeal: id } = meals[0];
       return history.push(`/comidas/${id}`);

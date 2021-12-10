@@ -33,6 +33,9 @@ function Header({ title, isRender }) {
 
   async function onClickSearchButton() {
     if (history.location.pathname === '/comidas') {
+      if (input.length > 1 && radio === 'FIRST_LETTER') {
+        return global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
       const fetchApi = async () => {
         const response = await foodApiToSelect(radio, input);
         setMeals(response.meals);
@@ -40,6 +43,9 @@ function Header({ title, isRender }) {
       fetchApi();
     }
     if (history.location.pathname === '/bebidas') {
+      if (input.length > 1 && radio === 'FIRST_LETTER') {
+        return global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
       const fetchApi = async () => {
         const response = await drinkApiToSelect(radio, input);
         setDrinks(response.drinks);
@@ -75,7 +81,6 @@ function Header({ title, isRender }) {
               value={ input }
               onChange={ ({ target }) => setInput(target.value) }
             />
-
             <label htmlFor="INGREDIENT">
               Ingrediente
               <input
@@ -118,7 +123,6 @@ function Header({ title, isRender }) {
               onClick={ onClickSearchButton }
             >
               Buscar
-
             </button>
           </div>
         )}

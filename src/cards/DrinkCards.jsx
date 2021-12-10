@@ -27,9 +27,15 @@ function DrinkCards() {
   }
 
   function goToDrink() {
+    if (drinks === null) {
+      return global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+
     if (drinks.length === 1) {
-      const { idMeal: id } = drinks[0];
-      return history.push(`/comidas/${id}`);
+      const { idDrink: id } = drinks[0];
+      return history.push(`/bebidas/${id}`);
     }
     return showCards();
   }
