@@ -4,42 +4,47 @@ import { useHistory } from 'react-router';
 import MyContext from '../context/MyContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import pagesRequest from '../searchByPage/searchByPage';
+import foodApiToSelect from '../services/searchMeals';
+import drinkApiToSelect from '../services/searchDrinks';
 
 function Header({ title, isRender }) {
   const [input, setInput] = useState('');
   const [search, setSearch] = useState(false);
 
-  const { setResult } = useContext(MyContext);
+  const { meals, drinks, setMeals, setDrinks } = useContext(MyContext);
+
   const [ingredient, setIngredient] = useState(false);
   const [radioName, setRadioName] = useState(false);
   const [firstLetter, setFirstLetter] = useState(false);
+
+  const [radio, setRadio] = useState('');
 
   const history = useHistory();
   function profileRedirect() {
     history.push('/perfil');
   }
 
+  console.log(meals);
+  console.log(drinks);
+
+  function handlerRadioInput({ target }) {
+    setRadio(target.id);
+  }
+
   async function onClickSearchButton() {
     if (history.location.pathname === '/comidas') {
-      const { meals } = await pagesRequest
-        .mealsResponse(ingredient, radioName, firstLetter, input);
-      if (meals.length === 1) {
-        const { idMeal } = meals[0];
-        history.push(`/comidas/${idMeal}`);
-      } else {
-        setResult(meals);
-      }
+      const fetchApi = async () => {
+        const response = await foodApiToSelect(radio, input);
+        setMeals(response.meals);
+      };
+      fetchApi();
     }
     if (history.location.pathname === '/bebidas') {
-      const { drinks } = await pagesRequest
-        .drinkResponse(ingredient, radioName, firstLetter, input);
-      if (drinks.length === 1) {
-        const { idDrink } = drinks[0];
-        history.push(`/bebidas/${idDrink}`);
-      } else {
-        setResult(drinks);
-      }
+      const fetchApi = async () => {
+        const response = await drinkApiToSelect(radio, input);
+        setDrinks(response.drinks);
+      };
+      fetchApi();
     }
   }
 
@@ -53,7 +58,6 @@ function Header({ title, isRender }) {
           alt="profileIcon"
           onClick={ profileRedirect }
         />
-        <h1 data-testid="page-title">{ title }</h1>
         { isRender && (
           <input
             data-testid="search-top-btn"
@@ -72,37 +76,40 @@ function Header({ title, isRender }) {
               onChange={ ({ target }) => setInput(target.value) }
             />
 
-            <label htmlFor="ingredient-search-radio">
+            <label htmlFor="INGREDIENT">
               Ingrediente
               <input
                 name="radio-button"
                 data-testid="ingredient-search-radio"
-                id="ingredient-search-radio"
+                id="INGREDIENT"
                 type="radio"
                 checked={ ingredient }
                 onClick={ () => setIngredient(!ingredient) }
+                onChange={ handlerRadioInput }
               />
             </label>
-            <label htmlFor="name-search-radio">
+            <label htmlFor="NAME">
               Nome
               <input
                 name="radio-button"
                 data-testid="name-search-radio"
-                id="name-search-radio"
+                id="NAME"
                 type="radio"
                 checked={ radioName }
                 onClick={ () => setRadioName(!radioName) }
+                onChange={ handlerRadioInput }
               />
             </label>
-            <label htmlFor="first-letter-search-radio">
+            <label htmlFor="FIRST_LETTER">
               Primeira letra
               <input
                 name="radio-button"
                 data-testid="first-letter-search-radio"
-                id="first-letter-search-radio"
+                id="FIRST_LETTER"
                 type="radio"
                 checked={ firstLetter }
                 onClick={ () => setFirstLetter(!firstLetter) }
+                onChange={ handlerRadioInput }
               />
             </label>
             <button
@@ -115,7 +122,7 @@ function Header({ title, isRender }) {
             </button>
           </div>
         )}
-
+        <h1 data-testid="page-title">{ title }</h1>
       </header>
     </div>
   );
