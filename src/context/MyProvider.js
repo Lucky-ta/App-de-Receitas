@@ -11,8 +11,12 @@ function Provider({ children }) {
     setState,
   };
 
+  const API_RESULTS_INITIAL_STATE = [];
+
+  const [result, setResult] = useState(API_RESULTS_INITIAL_STATE);
+
   return (
-    <MyContext.Provider value={ data }>
+    <MyContext.Provider value={ { data, result, setResult } }>
       { children }
     </MyContext.Provider>
   );
