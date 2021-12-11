@@ -8,51 +8,61 @@ import MyContext from '../context/MyContext';
 
 export default function Button({ categories }) {
   const history = useHistory();
-  const { setMeals, setDrinks } = useContext(MyContext);
 
-  function clickHandler(categorie) {
-    // let api = [];
-    // if (history.location.pathname === '/comidas') {
-    //   const fetchApi = async () => {
-    //     const response = await foodApiToSelect('CATEGORIES', categorie);
-    //     console.log(response);
-    //     setMeals(response.meals);
-    //     api = response;
-    //     return fetchApi;
-    //   };
-    // }
-    // if (history.location.pathname === '/bebidas') {
-    //   const fetchApi = async () => {
-    //     const response = await drinkApiToSelect('CATEGORIES', categorie);
-    //     setDrinks(response.drinks);
-    //     api = response;
-    //     return fetchApi;
-    //   };
-    // }
-    return console.log(categorie);
+  const { setResults, toogle, setToogle } = useContext(MyContext);
+
+  async function clickHandler({ target }) {
+    const { id } = target;
+    if (history.location.pathname === '/comidas') {
+      const fetchApi = async () => {
+        const response = await foodApiToSelect('CATEGORIES', id);
+        setToogle(!toogle);
+        setResults(response.meals);
+      };
+      fetchApi();
+    }
+    if (history.location.pathname === '/bebidas') {
+      const fetchApi = async () => {
+        const response = await drinkApiToSelect('CATEGORIES', id);
+        setResults(response.drinks);
+        setToogle(!toogle);
+      };
+      fetchApi();
+    }
   }
 
   const buttons = categories.filter((card, index) => index <= BUTTON_CAT);
 
   return (
     <div>
-      { buttons.map(({ strCategory }, index) => (
+      <div>
         <input
-          key={ index }
-          data-testid={ `${strCategory.split(' ').splice('/')}-category-filter` }
+          data-testid="All-category-filter"
           type="button"
-          alt={ strCategory }
-          value={ strCategory }
-          onClick={ clickHandler(strCategory) }
+          alt="All"
+          value="All"
+          onClick={ () => { setToogle(true); } }
         />
-      ))}
+      </div>
+      <div>
+        { buttons.map(({ strCategory }, index) => (
+          <input
+            key={ index }
+            data-testid={ `${strCategory}-category-filter` }
+            type="button"
+            id={ strCategory }
+            alt={ strCategory }
+            value={ strCategory }
+            onClick={ clickHandler }
+          />
+        ))}
+      </div>
     </div>
-
   );
 }
 
 Button.propTypes = {
   categories: PropTypes.oneOfType(
-    (PropTypes.array, PropTypes.object, PropTypes.func),
+    (PropTypes.array, PropTypes.object, PropTypes.func, undefined),
   ).isRequired,
 };

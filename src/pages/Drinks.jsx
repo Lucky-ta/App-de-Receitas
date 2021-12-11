@@ -5,9 +5,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../context/MyContext';
 
-function Drinks() {
+export default function Drinks() {
   const { categories: { drinks } } = useContext(MyContext);
-
   return (
     <div>
       <Header title="Bebidas" isRender />
@@ -17,5 +16,3 @@ function Drinks() {
     </div>
   );
 }
-
-export default Drinks;

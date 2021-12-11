@@ -4,11 +4,14 @@ import MyContext from '../context/MyContext';
 import { MAX_CARDS } from '../global/constants';
 
 function DrinkCards() {
-  const { drinks } = useContext(MyContext);
+  const { drinks, results, toogle } = useContext(MyContext);
   const history = useHistory();
 
   function showCards() {
-    const cards = drinks.filter((card, index) => index <= MAX_CARDS);
+    const cards = toogle
+      ? drinks.filter((card, index) => index <= MAX_CARDS)
+      : results.filter((card, index) => index <= MAX_CARDS);
+
     return (
       cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>

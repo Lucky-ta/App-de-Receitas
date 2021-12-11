@@ -4,12 +4,14 @@ import MyContext from '../context/MyContext';
 import { MAX_CARDS } from '../global/constants';
 
 function MealCards() {
-  const { meals } = useContext(MyContext);
+  const { meals, results, toogle } = useContext(MyContext);
 
   const history = useHistory();
 
   function showCards() {
-    const cards = meals.filter((card, index) => index <= MAX_CARDS);
+    const cards = toogle
+      ? meals.filter((card, index) => index <= MAX_CARDS)
+      : results.filter((card, index) => index <= MAX_CARDS);
     return (
       cards.map(({ idMeal, strMealThumb, strMeal }, index) => (
         <Link to={ `/comidas/${idMeal}` } key={ idMeal }>

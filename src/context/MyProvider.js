@@ -7,7 +7,10 @@ import drinkApiToSelect from '../services/searchDrinks';
 function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [result, setResult] = useState([]);
+  const [results, setResults] = useState([]);
+  const [toogle, setToogle] = useState(true);
+  // serve para salvar o último botao clicado, ainda não foi usado
+  const [stateLocked, setStateLocked] = useState(false);
 
   const [categories, setCategories] = useState({
     meals: [],
@@ -21,8 +24,12 @@ function Provider({ children }) {
     setDrinks,
     categories,
     setCategories,
-    result,
-    setResult,
+    results,
+    setResults,
+    toogle,
+    setToogle,
+    stateLocked,
+    setStateLocked,
   };
 
   useEffect(() => {
