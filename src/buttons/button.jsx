@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BUTTON_CAT } from '../global/constants';
 
 function Button({ categories }) {
+  const buttons = categories.filter((card, index) => index <= BUTTON_CAT);
+
   return (
-    categories.map(({ strCategory }, index) => (
+    buttons.map(({ strCategory }, index) => (
       <Link
         to="/"
         key={ index }
