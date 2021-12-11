@@ -5,6 +5,7 @@ import { MAX_CARDS } from '../global/constants';
 
 function MealCards() {
   const { meals } = useContext(MyContext);
+
   const history = useHistory();
 
   function showCards() {

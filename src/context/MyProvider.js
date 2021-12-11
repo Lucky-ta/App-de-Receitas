@@ -8,11 +8,18 @@ function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
+  const [categories, setCategories] = useState({
+    meals: [],
+    drinks: [],
+  });
+
   const data = {
     meals,
     setMeals,
     drinks,
     setDrinks,
+    categories,
+    setCategories,
   };
 
   useEffect(() => {
@@ -27,6 +34,18 @@ function Provider({ children }) {
     const fetchApi = async () => {
       const response = await drinkApiToSelect('ALL');
       setDrinks(response.drinks);
+    };
+    fetchApi();
+  }, []);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const mealsCategories = await foodApiToSelect('CATEGORIES');
+      const drinksCategories = await drinkApiToSelect('CATEGORIES');
+      setCategories({
+        meals: mealsCategories.meals,
+        drinks: drinksCategories.drinks,
+      });
     };
     fetchApi();
   }, []);

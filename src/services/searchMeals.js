@@ -7,6 +7,7 @@ const BYAREA = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const AREA = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 const RANDOM = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const ALL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 
 export default async function foodApiToSelect(type, _value) {
   switch (type) {
@@ -24,6 +25,8 @@ export default async function foodApiToSelect(type, _value) {
     return getApi(`${BYAREA}`);
   case 'ALL':
     return getApi(`${ALL}`);
+  case 'CATEGORIES':
+    return getApi(`${CATEGORIES}`);
   default:
     break;
   }

@@ -1,12 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Button() {
+function Button({ categories }) {
   return (
-    <input
-      data-testid="search-top-btn"
-      type="image"
-      alt="searchIcon"
-    />
+    categories.map(({ strCategory }, index) => (
+      <Link
+        to="/"
+        key={ index }
+      >
+        <input
+          data-testid={ `${strCategory}-category-filter` }
+          type="button"
+          alt="searchIcon"
+          value={ strCategory }
+        />
+      </Link>
+    ))
   );
 }
 

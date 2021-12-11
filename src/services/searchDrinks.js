@@ -5,6 +5,7 @@ const NAME = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const FIRST_LETTER = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=';
 const INGREDIENT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const RANDOM = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+const CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
 export default async function drinkApiToSelect(type, _value) {
   switch (type) {
@@ -18,6 +19,8 @@ export default async function drinkApiToSelect(type, _value) {
     return getApi(`${RANDOM}`);
   case 'ALL':
     return getApi(`${ALL}`);
+  case 'CATEGORIES':
+    return getApi(`${CATEGORIES}`);
   default:
     break;
   }
