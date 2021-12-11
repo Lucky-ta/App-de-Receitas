@@ -13,6 +13,7 @@ import ExploreMealsByIngredients from '../pages/ExploreMealsByIngredients';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import RecipeMealDetails from '../pages/RecipeMealDetails';
 import MealsRecipesInProgress from '../pages/MealsRecipesInProgress';
+import ExploreRandomMeals from '../pages/ExploreRandomMeals';
 import Meals from '../pages/Meals';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
@@ -44,6 +45,7 @@ function Routes() {
         component={ ExploreDrinksByIngredients }
       />
       <Route exact path="/explorar/comidas/area" component={ ExploreMealsByArea } />
+      <Route exact path="/explorar/comidas/random" component={ ExploreRandomMeals } />
       <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/receitas-feitas" component={ RecipesDone } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
