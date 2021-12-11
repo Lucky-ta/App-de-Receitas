@@ -40,8 +40,8 @@ function Provider({ children }) {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const mealsCategories = await foodApiToSelect('CATEGORIES');
-      const drinksCategories = await drinkApiToSelect('CATEGORIES');
+      const mealsCategories = await foodApiToSelect('GET_CATEGORIES');
+      const drinksCategories = await drinkApiToSelect('GET_CATEGORIES');
       setCategories({
         meals: mealsCategories.meals,
         drinks: drinksCategories.drinks,
