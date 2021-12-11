@@ -7,6 +7,7 @@ import drinkApiToSelect from '../services/searchDrinks';
 function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [result, setResult] = useState([]);
 
   const [categories, setCategories] = useState({
     meals: [],
@@ -20,6 +21,8 @@ function Provider({ children }) {
     setDrinks,
     categories,
     setCategories,
+    result,
+    setResult,
   };
 
   useEffect(() => {
