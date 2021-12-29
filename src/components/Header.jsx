@@ -11,7 +11,7 @@ function Header({ title, isRender }) {
   const [input, setInput] = useState('');
   const [search, setSearch] = useState(false);
 
-  const { meals, drinks, setMeals, setDrinks } = useContext(MyContext);
+  const { setMeals, setDrinks } = useContext(MyContext);
 
   const [ingredient, setIngredient] = useState(false);
   const [radioName, setRadioName] = useState(false);
@@ -23,9 +23,6 @@ function Header({ title, isRender }) {
   function profileRedirect() {
     history.push('/perfil');
   }
-
-  console.log(meals);
-  console.log(drinks);
 
   function handlerRadioInput({ target }) {
     setRadio(target.id);
