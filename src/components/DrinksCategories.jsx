@@ -7,7 +7,7 @@ import { MAX_CATEGORIES_LENGHT } from '../global/constants';
 function DrinksCategories() {
   const { drinksCategories, setDrinks, toggle, setToggle } = useContext(MyContext);
 
-  async function logTest(category) {
+  async function filterByCategory(category) {
     const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
     const response = await fetch(URL);
     const json = await response.json();
@@ -15,8 +15,8 @@ function DrinksCategories() {
     setToggle(!toggle);
 
     if (toggle === true) {
-      const responsee = await drinkApiToSelect('ALL');
-      return setDrinks(responsee.drinks);
+      const results = await drinkApiToSelect('ALL');
+      return setDrinks(results.drinks);
     } setDrinks(json.drinks);
   }
 
@@ -27,7 +27,7 @@ function DrinksCategories() {
           type="button"
           key={ index }
           data-testid={ `${strCategory}-category-filter` }
-          onClick={ () => logTest(strCategory) }
+          onClick={ () => filterByCategory(strCategory) }
         >
           { strCategory }
         </button>
