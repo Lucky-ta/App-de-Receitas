@@ -4,7 +4,16 @@ import { MAX_CATEGORIES_LENGHT } from '../global/constants';
 import MyContext from '../context/MyContext';
 
 function MealsCategories() {
-  const { mealsCategories } = useContext(MyContext);
+  const { mealsCategories, setMeals, meals } = useContext(MyContext);
+
+  async function logTest(category) {
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+    const response = await fetch(URL);
+    const json = await response.json();
+
+    setMeals(json.meals);
+    return meals;
+  }
 
   return (
     <div>
@@ -13,6 +22,7 @@ function MealsCategories() {
           type="button"
           key={ index }
           data-testid={ `${strCategory}-category-filter` }
+          onClick={ () => logTest(strCategory) }
         >
           { strCategory }
         </button>

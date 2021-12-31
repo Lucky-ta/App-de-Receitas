@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import MyContext from '../context/MyContext';
-import { MAX_CARDS } from '../global/constants';
+import { MAX_CARDS, MAX_OBJECT_KEYS } from '../global/constants';
 
 function MealCards() {
   const { meals } = useContext(MyContext);
+  console.log(meals);
   const history = useHistory();
 
   function showCards() {
@@ -33,7 +34,7 @@ function MealCards() {
       );
     }
 
-    if (meals.length === 1) {
+    if (meals.length === 1 && Object.keys(meals[0]).length !== MAX_OBJECT_KEYS) {
       const { idMeal: id } = meals[0];
       return history.push(`/comidas/${id}`);
     }
