@@ -5,7 +5,6 @@ import { MAX_CARDS, MAX_OBJECT_KEYS } from '../global/constants';
 
 function MealCards() {
   const { meals } = useContext(MyContext);
-  console.log(meals);
   const history = useHistory();
 
   function showCards() {

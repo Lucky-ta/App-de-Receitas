@@ -1,18 +1,23 @@
 import React, { useContext } from 'react';
+import drinkApiToSelect from '../services/searchDrinks';
 
 import MyContext from '../context/MyContext';
 import { MAX_CATEGORIES_LENGHT } from '../global/constants';
 
 function DrinksCategories() {
-  const { drinksCategories, setDrinks } = useContext(MyContext);
+  const { drinksCategories, setDrinks, toggle, setToggle } = useContext(MyContext);
 
   async function logTest(category) {
     const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
     const response = await fetch(URL);
-    const { drinks } = await response.json();
+    const json = await response.json();
 
-    setDrinks(drinks);
-    console.log(drinks);
+    setToggle(!toggle);
+
+    if (toggle === true) {
+      const responsee = await drinkApiToSelect('ALL');
+      return setDrinks(responsee.drinks);
+    } setDrinks(json.drinks);
   }
 
   return (
