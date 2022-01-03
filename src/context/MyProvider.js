@@ -7,15 +7,29 @@ import drinkApiToSelect from '../services/searchDrinks';
 function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [result, setResult] = useState([]);
+  const [results, setResults] = useState([]);
+  const [toogle, setToogle] = useState(true);
+  // serve para salvar o último botao clicado, ainda não foi usado
+  const [stateLocked, setStateLocked] = useState(false);
+
+  const [categories, setCategories] = useState({
+    meals: [],
+    drinks: [],
+  });
 
   const data = {
     meals,
     setMeals,
     drinks,
     setDrinks,
-    result,
-    setResult,
+    categories,
+    setCategories,
+    results,
+    setResults,
+    toogle,
+    setToogle,
+    stateLocked,
+    setStateLocked,
   };
 
   useEffect(() => {
@@ -30,6 +44,18 @@ function Provider({ children }) {
     const fetchApi = async () => {
       const response = await drinkApiToSelect('ALL');
       setDrinks(response.drinks);
+    };
+    fetchApi();
+  }, []);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const mealsCategories = await foodApiToSelect('GET_CATEGORIES');
+      const drinksCategories = await drinkApiToSelect('GET_CATEGORIES');
+      setCategories({
+        meals: mealsCategories.meals,
+        drinks: drinksCategories.drinks,
+      });
     };
     fetchApi();
   }, []);
