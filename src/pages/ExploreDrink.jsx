@@ -14,7 +14,7 @@ function ExploreDrinks({ history }) {
     })();
   }, []);
 
-  console.log(random);
+  // console.log(random);
 
   function redirectToExplore(type, explore) {
     if (explore) {
