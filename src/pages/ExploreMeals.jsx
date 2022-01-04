@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import foodApiToSelect from '../services/searchMeals';
 
 function ExploreMeals({ history }) {
-  function redirectToExplore(type) {
-    history.push(`/explorar/comidas/${type}`);
+  const [random, setRandom] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const { meals } = await foodApiToSelect('random');
+      setRandom(meals[0].idMeal);
+    })();
+  }, []);
+
+  console.log(random);
+
+  function redirectToExplore(type, explore) {
+    if (explore) {
+      history.push(`/explorar/comidas/${type}`);
+    } else {
+      history.push(`/comidas/${type}`);
+    }
   }
 
   return (
@@ -14,21 +30,21 @@ function ExploreMeals({ history }) {
       <button
         type="button"
         data-testid="explore-by-ingredient"
-        onClick={ () => redirectToExplore('ingredientes') }
+        onClick={ () => redirectToExplore('ingredientes', true) }
       >
         Por Ingredientes
       </button>
       <button
         type="button"
         data-testid="explore-by-area"
-        onClick={ () => redirectToExplore('area') }
+        onClick={ () => redirectToExplore('area', true) }
       >
         Por Local de Origem
       </button>
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={ () => redirectToExplore('random') }
+        onClick={ () => redirectToExplore(random, false) }
       >
         Me Surpreenda!
       </button>
