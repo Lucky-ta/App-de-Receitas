@@ -5,19 +5,23 @@ import MyContext from '../context/MyContext';
 import { MAX_CATEGORIES_LENGHT } from '../global/constants';
 
 function DrinksCategories() {
-  const { drinksCategories, setDrinks, toggle, setToggle } = useContext(MyContext);
+  const { drinksCategories,
+    setDrinks, drinks, toggle, setToggle, cat, setCat } = useContext(MyContext);
 
   async function filterByCategory(category) {
+    setToggle(!toggle);
+    setCat(category);
+
+    if (toggle === true && cat === category) {
+      const results = await drinkApiToSelect('ALL');
+      return setDrinks(results.drinks);
+    }
     const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
     const response = await fetch(URL);
     const json = await response.json();
 
-    setToggle(!toggle);
-
-    if (toggle === true) {
-      const results = await drinkApiToSelect('ALL');
-      return setDrinks(results.drinks);
-    } setDrinks(json.drinks);
+    setDrinks(json.drinks);
+    return drinks;
   }
 
   return (

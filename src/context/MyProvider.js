@@ -12,6 +12,7 @@ function Provider({ children }) {
   const [mealsCategories, setMealsCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [cat, setCat] = useState('');
 
   const data = {
     meals,
@@ -26,6 +27,8 @@ function Provider({ children }) {
     setDrinksCategories,
     toggle,
     setToggle,
+    cat,
+    setCat,
   };
 
   useEffect(() => {

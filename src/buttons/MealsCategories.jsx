@@ -5,21 +5,22 @@ import foodApiToSelect from '../services/searchMeals';
 import MyContext from '../context/MyContext';
 
 function MealsCategories() {
-  const { mealsCategories, setMeals, meals, toggle, setToggle } = useContext(MyContext);
+  const { mealsCategories,
+    setMeals, meals, toggle, setToggle, cat, setCat } = useContext(MyContext);
 
   async function filterByCategory(category) {
+    setToggle(!toggle);
+    setCat(category);
+
+    if (toggle === true && cat === category) {
+      const results = await foodApiToSelect('ALL');
+      return setMeals(results.meals);
+    }
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
     const response = await fetch(URL);
     const json = await response.json();
 
-    setToggle(!toggle);
-
-    if (toggle === true) {
-      const results = await foodApiToSelect('ALL');
-      return setMeals(results.meals);
-    } setMeals(json.meals);
-
-    console.log();
+    setMeals(json.meals);
     return meals;
   }
 
@@ -27,6 +28,7 @@ function MealsCategories() {
     <div>
       {mealsCategories.slice(0, MAX_CATEGORIES_LENGHT).map(({ strCategory }, index) => (
         <button
+          id={ strCategory }
           type="button"
           key={ index }
           data-testid={ `${strCategory}-category-filter` }
