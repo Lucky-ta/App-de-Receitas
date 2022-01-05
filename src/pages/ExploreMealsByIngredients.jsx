@@ -3,10 +3,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import foodApiToSelect from '../services/searchMeals';
 import IngredientsMealsCards from '../components/IngredientsMealsCards';
+import { TWELVE } from '../global/constants';
 
 function ExploreMealsByIngredients() {
   const [ingredients, setIngredients] = useState([]);
-  const TWELVE = 12;
 
   useEffect(() => {
     (async () => {
@@ -17,7 +17,7 @@ function ExploreMealsByIngredients() {
 
   const firstsIngredients = ingredients.slice(0, TWELVE);
 
-  console.log(firstsIngredients);
+  // console.log(firstsIngredients);
   return (
     <div>
       <Header title="Explorar Ingredientes" isRender={ false } />

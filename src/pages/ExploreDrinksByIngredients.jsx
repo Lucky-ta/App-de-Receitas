@@ -3,10 +3,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import drinkApiToSelect from '../services/searchDrinks';
 import IngredientsDrinksCards from '../components/IngredientsDrinksCards';
+import { TWELVE } from '../global/constants';
 
 function ExploreDrinksByIngredients() {
   const [ingredients, setIngredients] = useState([]);
-  const TWELVE = 12;
 
   useEffect(() => {
     (async () => {
