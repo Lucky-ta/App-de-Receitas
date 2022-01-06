@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
+import copy from 'clipboard-copy';
 import FilterHeader from '../components/FilterHeader';
 import Header from '../components/Header';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { INTERVAL } from '../global/constants';
 
 function FavoriteRecipes() {
   const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [isFavorite, setIsFavorite] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  function copieLink(path) {
+    const link = `http://localhost:3000/${path}`;
+    copy(link);
+    setCopied(true);
+    setTimeout(() => { setCopied(false); }, INTERVAL);
+    // global.alert('Link copiado!');
+  }
 
   function renderFavoriteRecipes() {
     return favRecipes.map((recipe, index) => (
@@ -28,11 +39,17 @@ function FavoriteRecipes() {
               {`${recipe.alcoholicOrNot}`}
             </p>)}
         <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
-        <img
-          src={ shareIcon }
-          alt="shareIcon"
-          data-testid={ `${index}-horizontal-share-btn` }
-        />
+        {copied
+          ? <span>Link copiado!</span>
+          : (
+            <input
+              type="image"
+              src={ shareIcon }
+              alt="shareIcon"
+              data-testid={ `${index}-horizontal-share-btn` }
+              onClick={ () => copieLink(`${recipe.type}s/${recipe.id}`) }
+            />
+          )}
         {!isFavorite
           ? (
             <input
