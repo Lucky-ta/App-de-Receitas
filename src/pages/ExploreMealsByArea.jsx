@@ -8,32 +8,33 @@ import { TWELVE } from '../global/constants';
 function ExploreMealsByArea() {
   const [areas, setAreas] = useState([]);
   const [mealsByArea, setMealsByArea] = useState([]);
-  const [optionArea, setOptionArea] = useState();
+  const [optionArea, setOptionArea] = useState('All');
   const history = useHistory();
 
   useEffect(() => {
     (async () => {
       const { meals } = await foodApiToSelect('BYAREA');
-      // const firstMeals = meals.slice(0, 13);
-      setAreas(meals);
-      setOptionArea(meals[0].strArea);
+      setAreas(['All', ...meals]);
     })();
   }, []);
 
-  // console.log(areas);
-  // console.log(optionArea);
-
   useEffect(() => {
     (async () => {
-      const { meals } = await foodApiToSelect('area', optionArea);
-      if (meals) {
-        const firstMealsByArea = meals.slice(0, TWELVE);
-        setMealsByArea(firstMealsByArea);
+      if (optionArea === 'All') {
+        const { meals } = await foodApiToSelect('ALL');
+        if (meals) {
+          const firstMealsByArea = meals.slice(0, TWELVE);
+          setMealsByArea(firstMealsByArea);
+        }
+      } else {
+        const { meals } = await foodApiToSelect('area', optionArea);
+        if (meals) {
+          const firstMealsByArea = meals.slice(0, TWELVE);
+          setMealsByArea(firstMealsByArea);
+        }
       }
     })();
   }, [optionArea]);
-
-  // console.log(mealsByArea);
 
   function renderSelect() {
     return (
@@ -42,15 +43,30 @@ function ExploreMealsByArea() {
         value={ optionArea }
         onChange={ ({ target }) => setOptionArea(target.value) }
       >
-        {areas.map(({ strArea }) => (
-          <option
-            key={ `${strArea}-key` }
-            data-testid={ `${strArea}-option` }
-            value={ strArea }
-          >
-            {strArea}
-          </option>
-        ))}
+        {areas.map((area) => {
+          console.log(area);
+          if (typeof area === 'string') {
+            return (
+              <option
+                key={ `${area}-key` }
+                data-testid={ `${area}-option` }
+                value={ area }
+              >
+                {area}
+              </option>
+
+            );
+          }
+          return (
+            <option
+              key={ `${area.strArea}-key` }
+              data-testid={ `${area.strArea}-option` }
+              value={ area.strArea }
+            >
+              {area.strArea}
+            </option>
+          );
+        })}
       </select>
     );
   }
