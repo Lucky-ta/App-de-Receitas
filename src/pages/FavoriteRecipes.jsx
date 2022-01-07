@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import FilterHeader from '../components/FilterHeader';
 import Header from '../components/Header';
@@ -7,9 +8,24 @@ import shareIcon from '../images/shareIcon.svg';
 import { INTERVAL } from '../global/constants';
 
 function FavoriteRecipes() {
-  const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  // const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const [favRecipes, setFavRecipes] = useState([]);
   const [auxRender, setAuxRender] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [filterRecipes, setFilterRecipes] = useState([]);
+
+  const filterData = {
+    favRecipes,
+    setIsFavorite,
+    setFilterRecipes,
+    auxRender,
+    setAuxRender,
+  };
+
+  useEffect(() => {
+    setFavRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
+  }, [auxRender]);
 
   function copieLink(path) {
     const link = `http://localhost:3000/${path}`;
@@ -24,13 +40,22 @@ function FavoriteRecipes() {
   }
 
   function renderFavoriteRecipes() {
-    return favRecipes.map((recipe, index) => (
+    const recipes = () => {
+      if (isFavorite) {
+        return filterRecipes;
+      }
+      return favRecipes;
+    };
+    return recipes().map((recipe, index) => (
       <div key={ recipe.id }>
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          src={ recipe.image }
-          alt={ recipe.name }
-        />
+        <Link to={ `${recipe.type}s/${recipe.id}` }>
+          <img
+            width="150px"
+            data-testid={ `${index}-horizontal-image` }
+            src={ recipe.image }
+            alt={ recipe.name }
+          />
+        </Link>
         {recipe.type === 'comida'
           && (
             <p data-testid={ `${index}-horizontal-top-text` }>
@@ -41,7 +66,11 @@ function FavoriteRecipes() {
             <p data-testid={ `${index}-horizontal-top-text` }>
               {`${recipe.alcoholicOrNot}`}
             </p>)}
-        <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
+        <Link to={ `${recipe.type}s/${recipe.id}` }>
+          <h3 data-testid={ `${index}-horizontal-name` }>
+            {recipe.name}
+          </h3>
+        </Link>
         {copied
           ? <span>Link copiado!</span>
           : (
@@ -71,7 +100,7 @@ function FavoriteRecipes() {
     <div>
       <Header title="Receitas Favoritas" isRender={ false } />
       FavoriteRecipes Page
-      <FilterHeader />
+      <FilterHeader value={ filterData } />
       {renderFavoriteRecipes()}
     </div>
   );
