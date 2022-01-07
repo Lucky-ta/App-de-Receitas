@@ -24,7 +24,15 @@ function FavoriteRecipes() {
   };
 
   useEffect(() => {
-    setFavRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    setFavRecipes(
+      () => {
+        if (localStorage.getItem('favoriteRecipes')) {
+          const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+          return favoriteRecipes;
+        }
+        return [];
+      },
+    );
   }, [auxRender]);
 
   function copieLink(path) {
