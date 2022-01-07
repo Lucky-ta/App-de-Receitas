@@ -4,12 +4,11 @@ import FilterHeader from '../components/FilterHeader';
 import Header from '../components/Header';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { INTERVAL } from '../global/constants';
 
 function FavoriteRecipes() {
   const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [auxRender, setAuxRender] = useState(true);
   const [copied, setCopied] = useState(false);
 
   function copieLink(path) {
@@ -17,7 +16,11 @@ function FavoriteRecipes() {
     copy(link);
     setCopied(true);
     setTimeout(() => { setCopied(false); }, INTERVAL);
-    // global.alert('Link copiado!');
+  }
+
+  function unfavoriteRecipe({ name }) {
+    const newArr = favRecipes.filter((receita) => receita.name !== name);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newArr));
   }
 
   function renderFavoriteRecipes() {
@@ -50,23 +53,16 @@ function FavoriteRecipes() {
               onClick={ () => copieLink(`${recipe.type}s/${recipe.id}`) }
             />
           )}
-        {!isFavorite
-          ? (
-            <input
-              type="image"
-              src={ blackHeartIcon }
-              alt="blackHeartIcon"
-              onClick={ () => setIsFavorite(false) }
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />)
-          : (
-            <input
-              type="image"
-              src={ whiteHeartIcon }
-              alt="whiteHeartIcon"
-              onClick={ () => setIsFavorite(true) }
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />)}
+        <input
+          type="image"
+          src={ blackHeartIcon }
+          alt="blackHeartIcon"
+          onClick={ () => {
+            setAuxRender(!auxRender);
+            unfavoriteRecipe(recipe);
+          } }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+        />
       </div>
     ));
   }
