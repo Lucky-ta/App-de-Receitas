@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react';
 import YouTube from 'react-youtube';
+import { Link } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -8,10 +9,16 @@ import Buttons from '../recipeDetailsComponents/Buttons';
 import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
 import getApi from '../services/getApi';
+import '../index.css';
 
 function RecipeDrinkDetails({ match }) {
   const [filter, setFilter] = useState([]);
-  const { stor, setStor, drinks } = useContext(MyContext);
+  const {
+    store,
+    setStore,
+    inProgress,
+    setInProgress,
+    meals } = useContext(MyContext);
 
   const { id } = match.params;
 
@@ -25,7 +32,7 @@ function RecipeDrinkDetails({ match }) {
       setFilter(response);
     };
     fetchApi();
-  }, [id, stor]);
+  }, [id, store]);
 
   if (filter.length === 0) {
     return null;
@@ -37,7 +44,8 @@ function RecipeDrinkDetails({ match }) {
     strDrink,
     strCategory,
     strInstructions,
-    idDrink, strArea,
+    idDrink,
+    strArea,
     dateModified,
     strTags,
     strYoutube,
@@ -54,7 +62,7 @@ function RecipeDrinkDetails({ match }) {
 
   const doneRecipes = {
     id: idDrink,
-    type: 'comida',
+    type: 'bebida',
     area: strArea,
     category: strCategory,
     alcoholicOrNot: '',
@@ -72,22 +80,49 @@ function RecipeDrinkDetails({ match }) {
   const measureValues = Object.values(drink[0]).slice(measureIndex);
   const measureArray = measureValues.slice(0, fifteen);
 
-  function click() {
-    setStor([...stor, doneRecipes]);
-    const test = ([...stor, doneRecipes]);
+  function beginRecipe() {
+    setStore([...store, doneRecipes]);
+    const test = ([...store, doneRecipes]);
+    const { cocktails } = inProgress;
+    const drinksInProgress = {
+      ...inProgress,
+      cocktails: {
+        ...cocktails,
+        [idDrink]: [],
+      },
+    };
+    setInProgress(drinksInProgress);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(drinksInProgress));
     localStorage.setItem('doneRecipes', JSON.stringify(test));
-    console.log(stor);
+  }
+
+  function onGoingRecipe() {
+    const { cocktails } = inProgress;
+    const drinksInProgress = {
+      ...inProgress,
+      cocktails: {
+        ...cocktails,
+        [idDrink]: [],
+      },
+    };
+    setInProgress(drinksInProgress);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(drinksInProgress));
   }
 
   const concatArrays = newArray
     .map((sla, index) => sla !== null && sla.length !== 0 && sla
       .concat(' - ', measureArray[index]));
 
-  const slicedMeals = drinks.slice(0, six);
+  const slicedMeals = meals.slice(0, six);
+
+  const { cocktails } = inProgress;
 
   return (
     <div>
-      <ImageAndTitle img={ strDrinkThumb } title={ strDrink } />
+      <ImageAndTitle
+        img={ strDrinkThumb }
+        title={ strDrink }
+      />
       <h2 data-testid="recipe-category">
         { strAlcoholic }
       </h2>
@@ -120,16 +155,29 @@ function RecipeDrinkDetails({ match }) {
           </div>
         ))}
       </div>
-      {!stor.some((obj) => obj.id === idDrink) && (
-        <button
-          className="start-recipe-btn"
-          type="button"
-          onClick={ click }
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
-      )}
+      { !Object.keys(cocktails).some((obj) => obj === idDrink)
+        ? (
+          <button
+            className="start-recipe-btn"
+            type="button"
+            onClick={ beginRecipe }
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        )
+        : (
+          <Link to={ `/bebidas/${id}/in-progress` }>
+            <button
+              type="button"
+              className="start-recipe-btn"
+              data-testid="start-recipe-btn"
+              onClick={ onGoingRecipe }
+            >
+              Continuar Receita
+            </button>
+          </Link>
+        )}
     </div>
   );
 }

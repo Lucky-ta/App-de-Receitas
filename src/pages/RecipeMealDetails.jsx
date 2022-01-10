@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react';
 import YouTube from 'react-youtube';
+import { Link } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -12,7 +13,12 @@ import '../index.css';
 
 function RecipeMealDetails({ match }) {
   const [filter, setFilter] = useState([]);
-  const { stor, setStor, meals } = useContext(MyContext);
+  const {
+    store,
+    setStore,
+    inProgress,
+    setInProgress,
+    drinks } = useContext(MyContext);
 
   const { id } = match.params;
 
@@ -26,15 +32,23 @@ function RecipeMealDetails({ match }) {
       setFilter(response);
     };
     fetchApi();
-  }, [id, stor]);
+  }, [id, store]);
 
   if (filter.length === 0) {
     return null;
   }
   const { meals: meal } = filter;
 
-  const { strMealThumb, strMeal, strCategory,
-    strInstructions, idMeal, strArea, dateModified, strTags, strYoutube } = meal[0];
+  const {
+    strMealThumb,
+    strMeal,
+    strCategory,
+    strInstructions,
+    idMeal,
+    strArea,
+    dateModified,
+    strTags,
+    strYoutube } = meal[0];
 
   function getId(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -65,18 +79,43 @@ function RecipeMealDetails({ match }) {
   const measureValues = Object.values(meal[0]).slice(measureIndex);
   const measureArray = measureValues.slice(0, twenty);
 
-  function click() {
-    setStor([...stor, doneRecipes]);
-    const test = ([...stor, doneRecipes]);
+  function beginRecipe() {
+    setStore([...store, doneRecipes]);
+    const test = ([...store, doneRecipes]);
+    const { meals: foods } = inProgress;
+    const mealsInProgress = {
+      ...inProgress,
+      meals: {
+        ...foods,
+        [idMeal]: [],
+      },
+    };
+    setInProgress(mealsInProgress);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(mealsInProgress));
     localStorage.setItem('doneRecipes', JSON.stringify(test));
-    console.log(stor);
+  }
+
+  function onGoingRecipe() {
+    const { meals: foods } = inProgress;
+    const mealsInProgress = {
+      ...inProgress,
+      meals: {
+        ...foods,
+        [idMeal]: [],
+      },
+    };
+    setInProgress(mealsInProgress);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(mealsInProgress));
   }
 
   const concatArrays = newArray
     .map((sla, index) => sla !== null && sla.length !== 0 && sla
       .concat(' - ', measureArray[index]));
 
-  const slicedMeals = meals.slice(0, six);
+  const slicedDrinks = drinks.slice(0, six);
+
+  const { meals: foods } = inProgress;
+  console.log(foods);
 
   return (
     <div>
@@ -97,7 +136,7 @@ function RecipeMealDetails({ match }) {
           )}
       </div>
       <div>
-        { slicedMeals.map((index, i) => (
+        { slicedDrinks.map((index, i) => (
           <div
             data-testid={ `${i}-recomendation-card` }
             key={ i }
@@ -105,22 +144,34 @@ function RecipeMealDetails({ match }) {
             <h1
               data-testid={ `${i}-recomendation-title` }
             >
-              { index.strMeal }
+              { index.strDrink }
             </h1>
           </div>
         ))}
       </div>
-      {!stor.some((obj) => obj.id === idMeal) && (
-        <button
-          className="start-recipe-btn"
-          type="button"
-          onClick={ click }
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-
-        </button>
-      )}
+      { !Object.keys(foods).some((obj) => obj === idMeal)
+        ? (
+          <button
+            className="start-recipe-btn"
+            type="button"
+            onClick={ beginRecipe }
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        )
+        : (
+          <Link to={ `/comidas/${id}/in-progress` }>
+            <button
+              type="button"
+              className="start-recipe-btn"
+              data-testid="start-recipe-btn"
+              onClick={ onGoingRecipe }
+            >
+              Continuar Receita
+            </button>
+          </Link>
+        )}
     </div>
   );
 }

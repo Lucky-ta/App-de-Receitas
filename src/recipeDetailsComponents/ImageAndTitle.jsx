@@ -5,9 +5,9 @@ function ImageAndTitle({ img, title }) {
   return (
     <div>
       <img
+        data-testid="recipe-photo"
         src={ img }
         alt="mealImage"
-        data-testid="recipe-photo"
         style={ { height: '5em' } }
       />
       <h1 data-testid="recipe-title">{title}</h1>

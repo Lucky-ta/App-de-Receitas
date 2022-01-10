@@ -6,6 +6,11 @@ import drinkApiToSelect from '../services/searchDrinks';
 import { getMealsCategories, getDrinksCategories } from '../services/getCategories';
 
 function Provider({ children }) {
+  const recipesDone = ({
+    meals: {},
+    cocktails: {},
+  });
+
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [result, setResult] = useState([]);
@@ -13,8 +18,8 @@ function Provider({ children }) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [cat, setCat] = useState('');
-  const [stor, setStor] = useState([]);
-
+  const [store, setStore] = useState([]);
+  const [inProgress, setInProgress] = useState(recipesDone);
 
   const data = {
     meals,
@@ -31,8 +36,10 @@ function Provider({ children }) {
     setToggle,
     cat,
     setCat,
-    stor,
-    setStor,
+    store,
+    setStore,
+    inProgress,
+    setInProgress,
   };
 
   useEffect(() => {
@@ -63,11 +70,18 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
-
     if (localStorage.doneRecipes) {
-      setStor(JSON.parse(localStorage.doneRecipes));
+      setStore(JSON.parse(localStorage.doneRecipes));
     } else {
-      localStorage.setItem('doneRecipes', JSON.stringify(stor));
+      localStorage.setItem('doneRecipes', JSON.stringify(store));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.inProgressRecipes) {
+      setInProgress(JSON.parse(localStorage.inProgressRecipes));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesDone));
     }
   }, []);
 

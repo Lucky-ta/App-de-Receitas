@@ -22,6 +22,7 @@ function Buttons({ shareIcon, WHIcon }) {
           data-testid="favorite-btn"
         />
       </button>
+
     </div>
   );
 }

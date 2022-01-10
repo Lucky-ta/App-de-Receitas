@@ -167,7 +167,7 @@ describe('36 - Implemente as recomendações, para receitas de comida, a recomen
   });
 });
 
-describe('37 - Implemente os cards de recomendação, onde serão 6 cards, mas mostrando apenas 2 e o scroll é horizontal, similar a um `carousel`', () => {
+describe.skip('37 - Implemente os cards de recomendação, onde serão 6 cards, mas mostrando apenas 2 e o scroll é horizontal, similar a um `carousel`', () => {
   it('Verifica se existem todas as recomendações na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/comidas/52771', {
       onBeforeLoad(win) {
@@ -295,7 +295,7 @@ describe('40 - Implemente a solução de modo que caso a receita tenha sido inic
       onBeforeLoad(win) {
         const inProgressRecipes = {
           meals: {
-            52771: [],
+            52771: [],            
           },
         };
         localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
