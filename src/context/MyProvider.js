@@ -13,6 +13,7 @@ function Provider({ children }) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [cat, setCat] = useState('');
+  const [stor, setStor] = useState([]);
 
   const data = {
     meals,
@@ -29,6 +30,8 @@ function Provider({ children }) {
     setToggle,
     cat,
     setCat,
+    stor,
+    setStor,
   };
 
   useEffect(() => {
@@ -56,6 +59,14 @@ function Provider({ children }) {
       setDrinks(response.drinks);
     };
     fetchApi();
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.doneRecipes) {
+      setStor(JSON.parse(localStorage.doneRecipes));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify(stor));
+    }
   }, []);
 
   return (
