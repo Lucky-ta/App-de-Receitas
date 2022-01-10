@@ -18,7 +18,7 @@ function Provider({ children }) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [cat, setCat] = useState('');
-  const [store, setStore] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState([]);
   const [inProgress, setInProgress] = useState(recipesDone);
 
   const data = {
@@ -36,8 +36,8 @@ function Provider({ children }) {
     setToggle,
     cat,
     setCat,
-    store,
-    setStore,
+    doneRecipes,
+    setDoneRecipes,
     inProgress,
     setInProgress,
   };
@@ -71,9 +71,9 @@ function Provider({ children }) {
 
   useEffect(() => {
     if (localStorage.doneRecipes) {
-      setStore(JSON.parse(localStorage.doneRecipes));
+      setDoneRecipes(JSON.parse(localStorage.doneRecipes));
     } else {
-      localStorage.setItem('doneRecipes', JSON.stringify(store));
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     }
   }, []);
 
@@ -81,7 +81,7 @@ function Provider({ children }) {
     if (localStorage.inProgressRecipes) {
       setInProgress(JSON.parse(localStorage.inProgressRecipes));
     } else {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesDone));
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
     }
   }, []);
 

@@ -14,8 +14,10 @@ import '../index.css';
 function RecipeDrinkDetails({ match }) {
   const [filter, setFilter] = useState([]);
   const {
-    store,
-    setStore,
+    // store,
+    // setStore,
+    doneRecipes,
+    setDoneRecipes,
     inProgress,
     setInProgress,
     meals } = useContext(MyContext);
@@ -32,7 +34,7 @@ function RecipeDrinkDetails({ match }) {
       setFilter(response);
     };
     fetchApi();
-  }, [id, store]);
+  }, [id, doneRecipes]);
 
   if (filter.length === 0) {
     return null;
@@ -60,7 +62,7 @@ function RecipeDrinkDetails({ match }) {
       : null;
   }
 
-  const doneRecipes = {
+  const recipes = {
     id: idDrink,
     type: 'bebida',
     area: strArea,
@@ -81,8 +83,8 @@ function RecipeDrinkDetails({ match }) {
   const measureArray = measureValues.slice(0, fifteen);
 
   function beginRecipe() {
-    setStore([...store, doneRecipes]);
-    const test = ([...store, doneRecipes]);
+    setDoneRecipes([...doneRecipes, recipes]);
+    const test = ([...doneRecipes, recipes]);
     const { cocktails } = inProgress;
     const drinksInProgress = {
       ...inProgress,
@@ -157,14 +159,17 @@ function RecipeDrinkDetails({ match }) {
       </div>
       { !Object.keys(cocktails).some((obj) => obj === idDrink)
         ? (
-          <button
-            className="start-recipe-btn"
-            type="button"
-            onClick={ beginRecipe }
-            data-testid="start-recipe-btn"
-          >
-            Iniciar Receita
-          </button>
+          <Link to={ `/bebidas/${id}/in-progress` }>
+            <button
+              className="start-recipe-btn"
+              type="button"
+              onClick={ beginRecipe }
+              data-testid="start-recipe-btn"
+            >
+              Iniciar Receita
+            </button>
+          </Link>
+
         )
         : (
           <Link to={ `/bebidas/${id}/in-progress` }>
