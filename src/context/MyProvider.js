@@ -15,6 +15,7 @@ function Provider({ children }) {
   const [cat, setCat] = useState('');
   const [stor, setStor] = useState([]);
 
+
   const data = {
     meals,
     setMeals,
@@ -62,6 +63,7 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
+
     if (localStorage.doneRecipes) {
       setStor(JSON.parse(localStorage.doneRecipes));
     } else {
