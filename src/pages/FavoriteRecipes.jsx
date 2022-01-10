@@ -1,33 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import FilterHeader from '../components/FilterHeader';
 import Header from '../components/Header';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { INTERVAL } from '../global/constants';
 
 function FavoriteRecipes() {
-  const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const [favRecipes, setFavRecipes] = useState([]);
+  const [auxRender, setAuxRender] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [filterRecipes, setFilterRecipes] = useState([]);
+
+  const filterData = {
+    favRecipes,
+    setIsFavorite,
+    setFilterRecipes,
+    auxRender,
+    setAuxRender,
+  };
+
+  useEffect(() => {
+    setFavRecipes(
+      () => {
+        if (localStorage.getItem('favoriteRecipes')) {
+          const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+          return favoriteRecipes;
+        }
+        return [];
+      },
+    );
+  }, [auxRender]);
 
   function copieLink(path) {
     const link = `http://localhost:3000/${path}`;
     copy(link);
     setCopied(true);
     setTimeout(() => { setCopied(false); }, INTERVAL);
-    // global.alert('Link copiado!');
+  }
+
+  function unfavoriteRecipe({ name }) {
+    const newArr = favRecipes.filter((receita) => receita.name !== name);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newArr));
   }
 
   function renderFavoriteRecipes() {
-    return favRecipes.map((recipe, index) => (
+    const recipes = () => {
+      if (isFavorite) {
+        return filterRecipes;
+      }
+      return favRecipes;
+    };
+    return recipes().map((recipe, index) => (
       <div key={ recipe.id }>
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          src={ recipe.image }
-          alt={ recipe.name }
-        />
+        <Link to={ `${recipe.type}s/${recipe.id}` }>
+          <img
+            width="150px"
+            data-testid={ `${index}-horizontal-image` }
+            src={ recipe.image }
+            alt={ recipe.name }
+          />
+        </Link>
         {recipe.type === 'comida'
           && (
             <p data-testid={ `${index}-horizontal-top-text` }>
@@ -38,7 +74,11 @@ function FavoriteRecipes() {
             <p data-testid={ `${index}-horizontal-top-text` }>
               {`${recipe.alcoholicOrNot}`}
             </p>)}
-        <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
+        <Link to={ `${recipe.type}s/${recipe.id}` }>
+          <h3 data-testid={ `${index}-horizontal-name` }>
+            {recipe.name}
+          </h3>
+        </Link>
         {copied
           ? <span>Link copiado!</span>
           : (
@@ -50,23 +90,16 @@ function FavoriteRecipes() {
               onClick={ () => copieLink(`${recipe.type}s/${recipe.id}`) }
             />
           )}
-        {!isFavorite
-          ? (
-            <input
-              type="image"
-              src={ blackHeartIcon }
-              alt="blackHeartIcon"
-              onClick={ () => setIsFavorite(false) }
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />)
-          : (
-            <input
-              type="image"
-              src={ whiteHeartIcon }
-              alt="whiteHeartIcon"
-              onClick={ () => setIsFavorite(true) }
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />)}
+        <input
+          type="image"
+          src={ blackHeartIcon }
+          alt="blackHeartIcon"
+          onClick={ () => {
+            setAuxRender(!auxRender);
+            unfavoriteRecipe(recipe);
+          } }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+        />
       </div>
     ));
   }
@@ -75,7 +108,7 @@ function FavoriteRecipes() {
     <div>
       <Header title="Receitas Favoritas" isRender={ false } />
       FavoriteRecipes Page
-      <FilterHeader />
+      <FilterHeader value={ filterData } />
       {renderFavoriteRecipes()}
     </div>
   );
