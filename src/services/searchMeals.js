@@ -10,6 +10,7 @@ const RANDOM = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const ALL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const GET_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+const ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 
 export default async function foodApiToSelect(type, _value) {
   switch (type) {
@@ -33,6 +34,8 @@ export default async function foodApiToSelect(type, _value) {
     return getApi(`${GET_CATEGORIES}`);
   case 'CATEGORIES':
     return getApi(`${CATEGORIES}${_value}`);
+  case 'ID':
+    return getApi(`${ID}${_value}`);
   default:
     break;
   }
