@@ -14,4 +14,20 @@ function getIngredients(random) {
   return ingredients.filter((ingredient) => ingredient !== '');
 }
 
+export function getIngredient(recipe) {
+  const keys = Object.keys(recipe).map((info) => {
+    if (info.includes('Ingredient')) {
+      return info;
+    }
+    return '';
+  });
+  const ingredients = keys.reduce((listOfIngredients, ingredient) => {
+    if (ingredient !== '' && recipe[ingredient] !== '') {
+      return [...listOfIngredients, recipe[ingredient]];
+    }
+    return listOfIngredients;
+  }, []);
+  return ingredients;
+}
+
 export default getIngredients;

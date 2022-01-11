@@ -5,8 +5,9 @@ import InProgressMeal from '../components/InProgressMeal';
 
 function MealsRecipesInProgress({ match }) {
   const { params: { id }, url } = match;
-  console.log(url);
-  const [recipe, setRecipe] = useState([]);
+  // console.log(url);
+  const [recipe, setRecipe] = useState({});
+
   useEffect(() => {
     (async () => {
       const { meals } = await foodApiToSelect('ID', id);
