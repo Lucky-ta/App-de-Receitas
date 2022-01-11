@@ -3,8 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import MyContext from '../context/MyContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Buttons from '../recipeDetailsComponents/Buttons';
 import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
@@ -14,8 +12,6 @@ import '../index.css';
 function RecipeMealDetails({ match }) {
   const [filter, setFilter] = useState([]);
   const {
-    // store,
-    // setStore,
     doneRecipes,
     setDoneRecipes,
     inProgress,
@@ -83,7 +79,7 @@ function RecipeMealDetails({ match }) {
 
   function beginRecipe() {
     setDoneRecipes([...doneRecipes, recipes]);
-    const test = ([...doneRecipes, recipes]);
+    const recipesToLocal = ([...doneRecipes, recipes]);
     const { meals: foods } = inProgress;
     const mealsInProgress = {
       ...inProgress,
@@ -94,7 +90,7 @@ function RecipeMealDetails({ match }) {
     };
     setInProgress(mealsInProgress);
     localStorage.setItem('inProgressRecipes', JSON.stringify(mealsInProgress));
-    localStorage.setItem('doneRecipes', JSON.stringify(test));
+    localStorage.setItem('doneRecipes', JSON.stringify(recipesToLocal));
   }
 
   function onGoingRecipe() {
@@ -117,12 +113,16 @@ function RecipeMealDetails({ match }) {
   const slicedDrinks = drinks.slice(0, six);
 
   const { meals: foods } = inProgress;
-  console.log(foods);
+
+  const bundle = {
+    recipe: meal[0],
+    type: 'comida',
+  };
 
   return (
     <div>
       <ImageAndTitle img={ strMealThumb } title={ strMeal } />
-      <Buttons shareIcon={ shareIcon } WHIcon={ whiteHeartIcon } />
+      <Buttons data={ bundle } />
       <h3 data-testid="recipe-category">{ strCategory }</h3>
       <Ingredients ingredients={ concatArrays } />
       <h4 data-testid="instructions">{ strInstructions }</h4>

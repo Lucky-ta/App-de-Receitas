@@ -11,6 +11,8 @@ function Provider({ children }) {
     cocktails: {},
   });
 
+  // const favorite = ([]);
+
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [result, setResult] = useState([]);
@@ -20,6 +22,7 @@ function Provider({ children }) {
   const [cat, setCat] = useState('');
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inProgress, setInProgress] = useState(recipesDone);
+  const [favorites, setFavorites] = useState([]);
 
   const data = {
     meals,
@@ -40,6 +43,8 @@ function Provider({ children }) {
     setDoneRecipes,
     inProgress,
     setInProgress,
+    favorites,
+    setFavorites,
   };
 
   useEffect(() => {
@@ -82,6 +87,14 @@ function Provider({ children }) {
       setInProgress(JSON.parse(localStorage.inProgressRecipes));
     } else {
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      setFavorites(JSON.parse(localStorage.favoriteRecipes));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
     }
   }, []);
 

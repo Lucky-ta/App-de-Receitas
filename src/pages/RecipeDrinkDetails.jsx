@@ -3,8 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import MyContext from '../context/MyContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Buttons from '../recipeDetailsComponents/Buttons';
 import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
@@ -14,8 +12,6 @@ import '../index.css';
 function RecipeDrinkDetails({ match }) {
   const [filter, setFilter] = useState([]);
   const {
-    // store,
-    // setStore,
     doneRecipes,
     setDoneRecipes,
     inProgress,
@@ -84,7 +80,7 @@ function RecipeDrinkDetails({ match }) {
 
   function beginRecipe() {
     setDoneRecipes([...doneRecipes, recipes]);
-    const test = ([...doneRecipes, recipes]);
+    const recipesToLocal = ([...doneRecipes, recipes]);
     const { cocktails } = inProgress;
     const drinksInProgress = {
       ...inProgress,
@@ -95,7 +91,7 @@ function RecipeDrinkDetails({ match }) {
     };
     setInProgress(drinksInProgress);
     localStorage.setItem('inProgressRecipes', JSON.stringify(drinksInProgress));
-    localStorage.setItem('doneRecipes', JSON.stringify(test));
+    localStorage.setItem('doneRecipes', JSON.stringify(recipesToLocal));
   }
 
   function onGoingRecipe() {
@@ -119,6 +115,11 @@ function RecipeDrinkDetails({ match }) {
 
   const { cocktails } = inProgress;
 
+  const bundle = {
+    recipe: drink[0],
+    type: 'bebida',
+  };
+
   return (
     <div>
       <ImageAndTitle
@@ -128,7 +129,7 @@ function RecipeDrinkDetails({ match }) {
       <h2 data-testid="recipe-category">
         { strAlcoholic }
       </h2>
-      <Buttons shareIcon={ shareIcon } WHIcon={ whiteHeartIcon } />
+      <Buttons data={ bundle } />
       <h3 data-testid="recipe-category">{ strCategory }</h3>
       <Ingredients ingredients={ concatArrays } />
       <h4 data-testid="instructions">{ strInstructions }</h4>
