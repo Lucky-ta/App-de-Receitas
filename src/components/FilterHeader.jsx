@@ -1,26 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function FilterHeader({ value }) {
-  const {
-    favRecipes,
-    setIsFavorite,
-    setFilterRecipes,
-    auxRender,
-    setAuxRender,
-  } = value;
-
+function FilterHeader({ setFilterType }) {
   function filterRecipes(type) {
-    const recipesFiltered = favRecipes.filter((recipe) => recipe.type === type);
-    setFilterRecipes(recipesFiltered);
-    setIsFavorite(true);
-    setAuxRender(!auxRender);
+    setFilterType(type);
   }
 
   function clearFilters() {
-    setFilterRecipes([]);
-    setIsFavorite(false);
-    setAuxRender(!auxRender);
+    setFilterType('');
   }
 
   return (
@@ -51,7 +38,7 @@ function FilterHeader({ value }) {
 }
 
 FilterHeader.propTypes = {
-  value: PropTypes.objectOf(PropTypes.any).isRequired,
+  setFilterType: PropTypes.func.isRequired,
 };
 
 export default FilterHeader;
