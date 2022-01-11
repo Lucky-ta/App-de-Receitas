@@ -4,6 +4,7 @@ import AllCategories from '../buttons/AllCategories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MealsCategories from '../buttons/MealsCategories';
+import { MAX_CARDS } from '../global/constants';
 
 export default function Meals() {
   return (
@@ -11,7 +12,7 @@ export default function Meals() {
       <Header title="Comidas" isRender />
       <AllCategories />
       <MealsCategories />
-      <MealCards />
+      <MealCards size={ MAX_CARDS } />
       <Footer />
     </div>
   );

@@ -8,6 +8,7 @@ import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
 import getApi from '../services/getApi';
 import '../index.css';
+import MealCards from '../cards/MealCards';
 
 function RecipeDrinkDetails({ match }) {
   const [filter, setFilter] = useState([]);
@@ -20,7 +21,6 @@ function RecipeDrinkDetails({ match }) {
 
   const { id } = match.params;
 
-  const six = 6;
   const eleven = 11;
   const fifteen = 15;
 
@@ -111,8 +111,6 @@ function RecipeDrinkDetails({ match }) {
     .map((sla, index) => sla !== null && sla.length !== 0 && sla
       .concat(' - ', measureArray[index]));
 
-  const slicedMeals = meals.slice(0, six);
-
   const { cocktails } = inProgress;
 
   const bundle = {
@@ -145,7 +143,7 @@ function RecipeDrinkDetails({ match }) {
           )}
       </div>
       <div>
-        { slicedMeals.map((index, i) => (
+        { meals.slice(0, 1).map((index, i) => (
           <div
             data-testid={ `${i}-recomendation-card` }
             key={ i }
@@ -153,7 +151,7 @@ function RecipeDrinkDetails({ match }) {
             <h1
               data-testid={ `${i}-recomendation-title` }
             >
-              { index.strMeal }
+              <MealCards size={ 5 } />
             </h1>
           </div>
         ))}

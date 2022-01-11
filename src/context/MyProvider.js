@@ -11,8 +11,6 @@ function Provider({ children }) {
     cocktails: {},
   });
 
-  // const favorite = ([]);
-
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [result, setResult] = useState([]);
@@ -80,6 +78,7 @@ function Provider({ children }) {
     } else {
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -88,6 +87,7 @@ function Provider({ children }) {
     } else {
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -96,6 +96,7 @@ function Provider({ children }) {
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

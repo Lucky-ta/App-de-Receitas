@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
-import { MAX_CARDS, MAX_OBJECT_KEYS } from '../global/constants';
+import { MAX_OBJECT_KEYS } from '../global/constants';
 
-function DrinkCards() {
+function DrinkCards({ size }) {
   const { drinks } = useContext(MyContext);
   const history = useHistory();
 
   function showCards() {
-    const cards = drinks.filter((card, index) => index <= MAX_CARDS);
+    const cards = drinks.filter((card, index) => index <= size);
     return (
       cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
@@ -46,5 +47,9 @@ function DrinkCards() {
     </div>
   );
 }
+
+DrinkCards.propTypes = ({
+  size: PropTypes.number,
+}).isRequired;
 
 export default DrinkCards;

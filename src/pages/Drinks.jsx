@@ -11,7 +11,7 @@ export default function Drinks() {
       <Header title="Bebidas" isRender />
       <AllCategories />
       <DrinksCategories />
-      <DrinkCards />
+      <DrinkCards size={ 12 } />
       <Footer />
     </div>
   );

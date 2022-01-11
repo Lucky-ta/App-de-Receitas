@@ -8,6 +8,7 @@ import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
 import getApi from '../services/getApi';
 import '../index.css';
+import DrinkCards from '../cards/DrinkCards';
 
 function RecipeMealDetails({ match }) {
   const [filter, setFilter] = useState([]);
@@ -20,7 +21,6 @@ function RecipeMealDetails({ match }) {
 
   const { id } = match.params;
 
-  const six = 6;
   const eleven = 11;
   const twenty = 20;
 
@@ -110,7 +110,7 @@ function RecipeMealDetails({ match }) {
     .map((sla, index) => sla !== null && sla.length !== 0 && sla
       .concat(' - ', measureArray[index]));
 
-  const slicedDrinks = drinks.slice(0, six);
+  // const slicedDrinks = drinks.slice(0, six);
 
   const { meals: foods } = inProgress;
 
@@ -138,7 +138,7 @@ function RecipeMealDetails({ match }) {
           )}
       </div>
       <div>
-        { slicedDrinks.map((index, i) => (
+        { drinks.slice(0, 1).map((index, i) => (
           <div
             data-testid={ `${i}-recomendation-card` }
             key={ i }
@@ -146,7 +146,7 @@ function RecipeMealDetails({ match }) {
             <h1
               data-testid={ `${i}-recomendation-title` }
             >
-              { index.strDrink }
+              <DrinkCards size={ 5 } />
             </h1>
           </div>
         ))}
