@@ -1,13 +1,24 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import MyContext from '../context/MyContext';
+import { INTERVAL } from '../global/constants';
 
 function Buttons({ data }) {
   const { favorites, setFavorites } = useContext(MyContext);
   const { type } = data;
+  console.log(data);
+  const [copied, setCopied] = useState(false);
+
+  function copieLink(path) {
+    const link = `http://localhost:3000/${path}`;
+    copy(link);
+    setCopied(true);
+    setTimeout(() => { setCopied(false); }, INTERVAL);
+  }
 
   function addFavorites() {
     if (type === 'comida') {
@@ -71,6 +82,17 @@ function Buttons({ data }) {
     return isFavoriteDrink;
   }
 
+  function gettingId() {
+    if (type === 'comida') {
+      const id = data.recipe.idMeal;
+      return id;
+    }
+    const id = data.recipe.idDrink;
+    return id;
+  }
+
+  const id = gettingId();
+
   return (
     <div>
       <button
@@ -84,15 +106,17 @@ function Buttons({ data }) {
         />
       </button>
 
-      <button
-        type="button"
-      >
-        <img
-          src={ shareIcon }
-          alt="shareIcon"
-          data-testid="share-btn"
-        />
-      </button>
+      {copied
+        ? <span>Link copiado!</span>
+        : (
+          <input
+            type="image"
+            src={ shareIcon }
+            alt="shareIcon"
+            data-testid="share-btn"
+            onClick={ () => copieLink(`${type}s/${id}`) }
+          />
+        )}
 
     </div>
   );
