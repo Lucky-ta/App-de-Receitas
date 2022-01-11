@@ -6,10 +6,12 @@ import { getIngredient } from '../services/getIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import IngredientsCards from '../cards/IngredientsCards';
 
 function InProgressMeal({ recipe, url }) {
   const [copied, setCopied] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
+  const [ingredientsUsed, setIngredientsUsed] = useState([]);
 
   useEffect(() => {
     setFavRecipes(
@@ -18,12 +20,32 @@ function InProgressMeal({ recipe, url }) {
           const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
           return favoriteRecipes;
         }
+        localStorage.setItem('favoriteRecipes', JSON.stringify(favRecipes));
         return [];
       },
     );
   }, []);
 
-  // function addFavorite() {}
+  useEffect(() => {
+    if (!localStorage.getItem('inProgressRecipes')) {
+      const inProgressDefault = { cocktails: {}, meals: {} };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressDefault));
+    }
+    setIngredientsUsed(
+      () => {
+        // && recipe.idMeal
+        if (localStorage.getItem('inProgressRecipes')) {
+          const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+          if (inProgressRecipes && recipe.idMeal in inProgressRecipes.meals) {
+            const { meals } = inProgressRecipes;
+            return meals[recipe.idMeal];
+          }
+          return [];
+        }
+        return [];
+      },
+    );
+  }, [recipe.idMeal]);
 
   function copieLink(path) {
     const link = `http://localhost:3000/${path}`;
@@ -78,17 +100,15 @@ function InProgressMeal({ recipe, url }) {
       <div>
         <h3>Ingredientes</h3>
         {getIngredient(recipe).map((ingredient, index) => (
-          <label
+          <IngredientsCards
             key={ `${index}-${ingredient}` }
-            htmlFor={ `${index}-${ingredient}` }
-          >
-            <input
-              type="checkbox"
-              data-testid={ `${index}-ingredient-step` }
-              id={ `${index}-${ingredient}` }
-            />
-            {ingredient}
-          </label>
+            ingredient={ ingredient }
+            index={ index }
+            ingredientsUsed={ ingredientsUsed }
+            setIngredientsUsed={ setIngredientsUsed }
+            checked={ ingredientsUsed.some((ingUsed) => ingUsed === ingredient) }
+            id={ recipe.idMeal }
+          />
         ))}
       </div>
       <p data-testid="instructions">{recipe.strInstructions}</p>
