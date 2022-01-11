@@ -7,6 +7,17 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import MyContext from '../context/MyContext';
 import { INTERVAL } from '../global/constants';
 
+function gettingId(data) {
+  const { type } = data;
+  console.log(type);
+  if (type === 'comida') {
+    const id = data.recipe.idMeal;
+    return id;
+  }
+  const id = data.recipe.idDrink;
+  return id;
+}
+
 function Buttons({ data }) {
   const { favorites, setFavorites } = useContext(MyContext);
   const { type } = data;
@@ -82,16 +93,7 @@ function Buttons({ data }) {
     return isFavoriteDrink;
   }
 
-  function gettingId() {
-    if (type === 'comida') {
-      const id = data.recipe.idMeal;
-      return id;
-    }
-    const id = data.recipe.idDrink;
-    return id;
-  }
-
-  const id = gettingId();
+  const id = gettingId(data);
 
   return (
     <div>
@@ -105,8 +107,7 @@ function Buttons({ data }) {
           data-testid="favorite-btn"
         />
       </button>
-
-      {copied
+      { copied
         ? <span>Link copiado!</span>
         : (
           <input
@@ -117,7 +118,6 @@ function Buttons({ data }) {
             onClick={ () => copieLink(`${type}s/${id}`) }
           />
         )}
-
     </div>
   );
 }
