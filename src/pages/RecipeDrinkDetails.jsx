@@ -118,6 +118,11 @@ function RecipeDrinkDetails({ match }) {
     type: 'bebida',
   };
 
+  const recommendation = {
+    isRecommendation: true,
+    size: 5,
+  };
+
   return (
     <div>
       <ImageAndTitle
@@ -131,6 +136,7 @@ function RecipeDrinkDetails({ match }) {
       <h3 data-testid="recipe-category">{ strCategory }</h3>
       <Ingredients ingredients={ concatArrays } />
       <h4 data-testid="instructions">{ strInstructions }</h4>
+
       <div data-testid="video">
         { strYoutube !== null
           && (
@@ -142,20 +148,21 @@ function RecipeDrinkDetails({ match }) {
             </div>
           )}
       </div>
-      <div>
+
+      <div
+        className="caroussel"
+      >
         { meals.slice(0, 1).map((index, i) => (
-          <div
-            data-testid={ `${i}-recomendation-card` }
-            key={ i }
-          >
-            <h1
-              data-testid={ `${i}-recomendation-title` }
-            >
-              <MealCards size={ 5 } />
-            </h1>
-          </div>
+          <MealCards key={ i } data={ recommendation } />
         ))}
       </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       { !Object.keys(cocktails).some((obj) => obj === idDrink)
         ? (
           <Link to={ `/bebidas/${id}/in-progress` }>
@@ -168,7 +175,6 @@ function RecipeDrinkDetails({ match }) {
               Iniciar Receita
             </button>
           </Link>
-
         )
         : (
           <Link to={ `/bebidas/${id}/in-progress` }>

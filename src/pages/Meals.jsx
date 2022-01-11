@@ -7,12 +7,16 @@ import MealsCategories from '../buttons/MealsCategories';
 import { MAX_CARDS } from '../global/constants';
 
 export default function Meals() {
+  const recommendation = {
+    isRecommendation: false,
+    size: MAX_CARDS,
+  };
   return (
     <div>
       <Header title="Comidas" isRender />
       <AllCategories />
       <MealsCategories />
-      <MealCards size={ MAX_CARDS } />
+      <MealCards data={ recommendation } />
       <Footer />
     </div>
   );

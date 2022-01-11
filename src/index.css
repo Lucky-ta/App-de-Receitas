@@ -21,3 +21,28 @@ code {
   position: fixed;
   bottom: 0px;
 }
+
+.caroussel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.caroussel .item {
+  display: flex;
+}
+
+.caroussel .item.hidden {
+  display: none;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+}
+
+.top .centering{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

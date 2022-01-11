@@ -3,25 +3,50 @@ import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
 import { MAX_OBJECT_KEYS } from '../global/constants';
+import '../index.css';
 
-function DrinkCards({ size }) {
+function DrinkCards({ data }) {
   const { drinks } = useContext(MyContext);
   const history = useHistory();
+  const { isRecommendation, size } = data;
+  console.log(isRecommendation);
 
   function showCards() {
     const cards = drinks.filter((card, index) => index <= size);
     return (
       cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
-          <div data-testid={ `${index}-recipe-card` }>
-            <img
-              data-testid={ `${index}-card-img` }
-              style={ { height: '5em' } }
-              src={ strDrinkThumb }
-              alt={ strDrink }
-            />
-            <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-          </div>
+          { isRecommendation
+            ? (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                className="item top"
+              >
+                <img
+                  data-testid={ `${index}-card-img` }
+                  style={ { height: '5em' } }
+                  src={ strDrinkThumb }
+                  alt={ strDrink }
+                />
+                <p
+                  data-testid={ `${index}-recomendation-title` }
+                  className="centering"
+                >
+                  { strDrink }
+                </p>
+              </div>
+            )
+            : (
+              <div data-testid={ `${index}-recipe-card` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  style={ { height: '5em' } }
+                  src={ strDrinkThumb }
+                  alt={ strDrink }
+                />
+                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+              </div>
+            )}
         </Link>
       ))
     );
@@ -42,9 +67,7 @@ function DrinkCards({ size }) {
   }
 
   return (
-    <div>
-      { goToDrink() }
-    </div>
+    goToDrink()
   );
 }
 

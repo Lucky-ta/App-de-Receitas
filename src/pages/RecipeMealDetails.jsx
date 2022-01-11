@@ -7,8 +7,8 @@ import Buttons from '../recipeDetailsComponents/Buttons';
 import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
 import getApi from '../services/getApi';
-import '../index.css';
 import DrinkCards from '../cards/DrinkCards';
+import '../index.css';
 
 function RecipeMealDetails({ match }) {
   const [filter, setFilter] = useState([]);
@@ -110,13 +110,16 @@ function RecipeMealDetails({ match }) {
     .map((sla, index) => sla !== null && sla.length !== 0 && sla
       .concat(' - ', measureArray[index]));
 
-  // const slicedDrinks = drinks.slice(0, six);
-
   const { meals: foods } = inProgress;
 
   const bundle = {
     recipe: meal[0],
     type: 'comida',
+  };
+
+  const recommendation = {
+    isRecommendation: true,
+    size: 5,
   };
 
   return (
@@ -137,20 +140,21 @@ function RecipeMealDetails({ match }) {
             </div>
           )}
       </div>
-      <div>
+
+      <div
+        className="caroussel"
+      >
         { drinks.slice(0, 1).map((index, i) => (
-          <div
-            data-testid={ `${i}-recomendation-card` }
-            key={ i }
-          >
-            <h1
-              data-testid={ `${i}-recomendation-title` }
-            >
-              <DrinkCards size={ 5 } />
-            </h1>
-          </div>
+          <DrinkCards key={ i } data={ recommendation } />
         ))}
       </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       { !Object.keys(foods).some((obj) => obj === idMeal)
         ? (
           <Link to={ `/comidas/${id}/in-progress` }>

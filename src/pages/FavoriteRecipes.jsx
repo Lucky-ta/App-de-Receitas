@@ -9,6 +9,7 @@ import { INTERVAL } from '../global/constants';
 
 function FavoriteRecipes() {
   const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  console.log(favRecipes);
   const [isFavorite, setIsFavorite] = useState(false);
   const [copied, setCopied] = useState(false);
 

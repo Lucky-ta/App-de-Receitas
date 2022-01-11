@@ -9,7 +9,6 @@ import { INTERVAL } from '../global/constants';
 
 function gettingId(data) {
   const { type } = data;
-  console.log(type);
   if (type === 'comida') {
     const id = data.recipe.idMeal;
     return id;
@@ -21,7 +20,6 @@ function gettingId(data) {
 function Buttons({ data }) {
   const { favorites, setFavorites } = useContext(MyContext);
   const { type } = data;
-  console.log(data);
   const [copied, setCopied] = useState(false);
 
   function copieLink(path) {

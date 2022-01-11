@@ -66,17 +66,3 @@
     transform: rotate(-10deg);
   }
 }
-
-
-.caroussel {
-  flex-direction: row;
-}
-
-.caroussel .item {
-  display: block;
-}
-
-.caroussel .item.hidden {
-  display: none;
-}
-
