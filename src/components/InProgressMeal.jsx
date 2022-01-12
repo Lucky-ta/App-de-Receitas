@@ -11,7 +11,6 @@ import IngredientsCards from '../cards/IngredientsCards';
 function InProgressMeal({ recipe, url }) {
   const [copied, setCopied] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
-  const [auxRender, setAuxRender] = useState(true);
   const [ingredientsUsed, setIngredientsUsed] = useState([]);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function InProgressMeal({ recipe, url }) {
       },
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auxRender]);
+  }, []);
 
   useEffect(() => {
     if (!localStorage.getItem('inProgressRecipes')) {
@@ -56,24 +55,7 @@ function InProgressMeal({ recipe, url }) {
   }
 
   function isFavorite() {
-    return favRecipes.some(({ id }) => {
-      if (typeof id === 'number') {
-        return id.toString() === recipe.idMeal;
-      }
-      return id === recipe.idMeal;
-    });
-  }
-
-  function addFavorite() {
-    const newFavorite = [...favRecipes, recipe];
-    setAuxRender(!auxRender);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
-  }
-
-  function removeFavorite({ name }) {
-    const rmFavorite = favRecipes.filter((receita) => receita.name !== name);
-    setAuxRender(!auxRender);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(rmFavorite));
+    return favRecipes.some(({ id }) => id.toString() === recipe.idMeal);
   }
 
   return (
