@@ -11,7 +11,7 @@ function getIngredients(random) {
     strIngredient15, strIngredient16, strIngredient17, strIngredient18, strIngredient19,
     strIngredient20];
 
-  return ingredients.filter((ingredient) => ingredient !== '');
+  return ingredients.filter((ingredient) => ingredient !== '' && ingredient);
 }
 
 export function getIngredient(recipe) {
@@ -21,9 +21,9 @@ export function getIngredient(recipe) {
     }
     return '';
   });
-  const ingredients = keys.reduce((listOfIngredients, ingredient) => {
-    if (ingredient !== '' && recipe[ingredient] !== '') {
-      return [...listOfIngredients, recipe[ingredient]];
+  const ingredients = keys.reduce((listOfIngredients, key) => {
+    if (recipe[key] && key !== '' && recipe[key] !== '') {
+      return [...listOfIngredients, recipe[key]];
     }
     return listOfIngredients;
   }, []);
