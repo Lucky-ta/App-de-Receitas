@@ -85,7 +85,7 @@ function InProgressMeal({ recipe, url }) {
             type="image"
             src={ blackHeartIcon }
             alt="blackHeartIcon"
-            onClick={ () => { removeFavorite(recipe); } }
+            onClick={ () => {} }
             data-testid="favorite-btn"
           />)
         : (
@@ -93,7 +93,7 @@ function InProgressMeal({ recipe, url }) {
             type="image"
             src={ whiteHeartIcon }
             alt="whiteHeartIcon"
-            onClick={ addFavorite }
+            // onClick={}
             data-testid="favorite-btn"
           />
         )}

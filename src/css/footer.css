@@ -6,7 +6,7 @@
 
 footer {
   background-color: rgb(194, 194, 194);
-  bottom: 0 px;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   padding-top: 1.5%;
