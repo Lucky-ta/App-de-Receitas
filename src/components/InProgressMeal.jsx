@@ -24,6 +24,7 @@ function InProgressMeal({ recipe, url }) {
         return [];
       },
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
