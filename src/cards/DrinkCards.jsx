@@ -1,29 +1,52 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
-import { MAX_CARDS } from '../global/constants';
+import { MAX_OBJECT_KEYS } from '../global/constants';
+import '../index.css';
 
-function DrinkCards() {
-  const { drinks, results, toogle } = useContext(MyContext);
+function DrinkCards({ data }) {
+  const { drinks } = useContext(MyContext);
   const history = useHistory();
+  const { isRecommendation, size } = data;
+  console.log(isRecommendation);
 
   function showCards() {
-    const cards = toogle
-      ? drinks.filter((card, index) => index <= MAX_CARDS)
-      : results.filter((card, index) => index <= MAX_CARDS);
-
+    const cards = drinks.filter((card, index) => index <= size);
     return (
       cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
-          <div data-testid={ `${index}-recipe-card` }>
-            <img
-              data-testid={ `${index}-card-img` }
-              style={ { height: '5em' } }
-              src={ strDrinkThumb }
-              alt={ strDrink }
-            />
-            <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-          </div>
+          { isRecommendation
+            ? (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                className="item top"
+              >
+                <img
+                  data-testid={ `${index}-card-img` }
+                  style={ { height: '5em' } }
+                  src={ strDrinkThumb }
+                  alt={ strDrink }
+                />
+                <p
+                  data-testid={ `${index}-recomendation-title` }
+                  className="centering"
+                >
+                  { strDrink }
+                </p>
+              </div>
+            )
+            : (
+              <div data-testid={ `${index}-recipe-card` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  style={ { height: '5em' } }
+                  src={ strDrinkThumb }
+                  alt={ strDrink }
+                />
+                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+              </div>
+            )}
         </Link>
       ))
     );
@@ -36,7 +59,7 @@ function DrinkCards() {
       );
     }
 
-    if (drinks.length === 1) {
+    if (drinks.length === 1 && Object.keys(drinks[0]).length !== MAX_OBJECT_KEYS) {
       const { idDrink: id } = drinks[0];
       return history.push(`/bebidas/${id}`);
     }
@@ -44,10 +67,12 @@ function DrinkCards() {
   }
 
   return (
-    <div>
-      { goToDrink() }
-    </div>
+    goToDrink()
   );
 }
+
+DrinkCards.propTypes = ({
+  size: PropTypes.number,
+}).isRequired;
 
 export default DrinkCards;

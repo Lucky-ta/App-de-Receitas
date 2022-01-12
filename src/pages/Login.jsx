@@ -21,11 +21,11 @@ function Login() {
   function onClickButton() {
     localStorage.setItem('mealsToken', JSON.stringify(1));
     localStorage.setItem('cocktailsToken', JSON.stringify(1));
-
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('doneRecipes', JSON.stringify([]));
     localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: 52977 }]));
-    localStorage.setItem('inProgressRecipes', JSON.stringify({}));
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify({ cocktails: {}, meals: {} }));
 
     history.push('/comidas');
   }

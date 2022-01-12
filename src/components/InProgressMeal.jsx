@@ -1,22 +1,17 @@
-import copy from 'clipboard-copy';
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import shareIcon from '../images/shareIcon.svg';
+import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import { INTERVAL } from '../global/constants';
+import { getIngredient } from '../services/getIngredients';
+import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import IngredientsCards from '../cards/IngredientsCards';
 
 function InProgressMeal({ recipe, url }) {
   const [copied, setCopied] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
-  console.log(recipe);
-
-  function copieLink(path) {
-    const link = `http://localhost:3000/${path}`;
-    copy(link);
-    setCopied(true);
-    setTimeout(() => { setCopied(false); }, INTERVAL);
-  }
+  const [ingredientsUsed, setIngredientsUsed] = useState([]);
 
   useEffect(() => {
     setFavRecipes(
@@ -25,13 +20,43 @@ function InProgressMeal({ recipe, url }) {
           const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
           return favoriteRecipes;
         }
+        localStorage.setItem('favoriteRecipes', JSON.stringify(favRecipes));
         return [];
       },
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem('inProgressRecipes')) {
+      const inProgressDefault = { cocktails: {}, meals: {} };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressDefault));
+    }
+    setIngredientsUsed(
+      () => {
+        // && recipe.idMeal
+        if (localStorage.getItem('inProgressRecipes')) {
+          const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+          if (inProgressRecipes && recipe.idMeal in inProgressRecipes.meals) {
+            const { meals } = inProgressRecipes;
+            return meals[recipe.idMeal];
+          }
+          return [];
+        }
+        return [];
+      },
+    );
+  }, [recipe.idMeal]);
+
+  function copieLink(path) {
+    const link = `http://localhost:3000/${path}`;
+    copy(link);
+    setCopied(true);
+    setTimeout(() => { setCopied(false); }, INTERVAL);
+  }
+
   function isFavorite() {
-    return favRecipes.some(({ id }) => id === recipe.id);
+    return favRecipes.some(({ id }) => id.toString() === recipe.idMeal);
   }
 
   return (
@@ -43,6 +68,7 @@ function InProgressMeal({ recipe, url }) {
         alt={ recipe.srtMeal }
       />
       <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
+      <span data-testid="recipe-category">{recipe.strCategory}</span>
       {copied
         ? <span>Link copiado!</span>
         : (
@@ -54,13 +80,52 @@ function InProgressMeal({ recipe, url }) {
             onClick={ () => copieLink(url) }
           />
         )}
-      {isFavorite() ? <p>olá</p> : <p>oi</p>}
+      {isFavorite()
+        ? (
+          <input
+            type="image"
+            src={ blackHeartIcon }
+            alt="blackHeartIcon"
+            onClick={ () => {} }
+            data-testid="favorite-btn"
+          />)
+        : (
+          <input
+            type="image"
+            src={ whiteHeartIcon }
+            alt="whiteHeartIcon"
+            onClick={ () => {} }
+            data-testid="favorite-btn"
+          />
+        )}
+      <div>
+        <h3>Ingredientes</h3>
+        {getIngredient(recipe).map((ingredient, index) => (
+          <IngredientsCards
+            key={ `${index}-${ingredient}` }
+            ingredient={ ingredient }
+            index={ index }
+            ingredientsUsed={ ingredientsUsed }
+            setIngredientsUsed={ setIngredientsUsed }
+            checked={ ingredientsUsed.some((ingUsed) => ingUsed === ingredient) }
+            id={ recipe.idMeal }
+          />
+        ))}
+      </div>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+      >
+        Finalizar Receita
+      </button>
     </main>
   );
 }
 
 InProgressMeal.propTypes = {
-  recipe: PropTypes.arrayOf(PropTypes.any).isRequired,
+  recipe: PropTypes.objectOf(PropTypes.any).isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default InProgressMeal;
