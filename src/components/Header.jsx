@@ -6,6 +6,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import foodApiToSelect from '../services/searchMeals';
 import drinkApiToSelect from '../services/searchDrinks';
+import '../css/header.css';
 
 function Header({ title, isRender }) {
   const [input, setInput] = useState('');
@@ -54,66 +55,73 @@ function Header({ title, isRender }) {
   return (
     <div>
       <header>
-        <input
-          type="image"
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="profileIcon"
-          onClick={ profileRedirect }
-        />
-        { isRender && (
+        <div className="header">
           <input
-            data-testid="search-top-btn"
             type="image"
-            src={ searchIcon }
-            alt="searchIcon"
-            onClick={ () => setSearch(!search) }
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profileIcon"
+            onClick={ profileRedirect }
+            className="profile-icon"
           />
-        )}
+          <h1 data-testid="page-title" className="header-name">{ title }</h1>
+          { isRender && (
+            <input
+              data-testid="search-top-btn"
+              type="image"
+              src={ searchIcon }
+              alt="searchIcon"
+              onClick={ () => setSearch(!search) }
+              className="search-icon"
+            />
+          )}
+        </div>
         { search && (
-          <div>
+          <div className="search-field">
             <input
               data-testid="search-input"
               type="text"
               value={ input }
               onChange={ ({ target }) => setInput(target.value) }
             />
-            <label htmlFor="INGREDIENT">
-              Ingrediente
-              <input
-                name="radio-button"
-                data-testid="ingredient-search-radio"
-                id="INGREDIENT"
-                type="radio"
-                checked={ ingredient }
-                onClick={ () => setIngredient(!ingredient) }
-                onChange={ handlerRadioInput }
-              />
-            </label>
-            <label htmlFor="NAME">
-              Nome
-              <input
-                name="radio-button"
-                data-testid="name-search-radio"
-                id="NAME"
-                type="radio"
-                checked={ radioName }
-                onClick={ () => setRadioName(!radioName) }
-                onChange={ handlerRadioInput }
-              />
-            </label>
-            <label htmlFor="FIRST_LETTER">
-              Primeira letra
-              <input
-                name="radio-button"
-                data-testid="first-letter-search-radio"
-                id="FIRST_LETTER"
-                type="radio"
-                checked={ firstLetter }
-                onClick={ () => setFirstLetter(!firstLetter) }
-                onChange={ handlerRadioInput }
-              />
-            </label>
+            <div className="filter-field">
+              <label htmlFor="INGREDIENT">
+                <input
+                  name="radio-button"
+                  data-testid="ingredient-search-radio"
+                  id="INGREDIENT"
+                  type="radio"
+                  checked={ ingredient }
+                  onClick={ () => setIngredient(!ingredient) }
+                  onChange={ handlerRadioInput }
+                />
+                Ingrediente
+              </label>
+              <label htmlFor="NAME">
+                <input
+                  name="radio-button"
+                  data-testid="name-search-radio"
+                  id="NAME"
+                  type="radio"
+                  checked={ radioName }
+                  onClick={ () => setRadioName(!radioName) }
+                  onChange={ handlerRadioInput }
+                />
+                Nome
+              </label>
+              <label htmlFor="FIRST_LETTER">
+                <input
+                  name="radio-button"
+                  data-testid="first-letter-search-radio"
+                  id="FIRST_LETTER"
+                  type="radio"
+                  checked={ firstLetter }
+                  onClick={ () => setFirstLetter(!firstLetter) }
+                  onChange={ handlerRadioInput }
+                />
+                Primeira letra
+              </label>
+            </div>
             <button
               data-testid="exec-search-btn"
               type="button"
@@ -123,7 +131,6 @@ function Header({ title, isRender }) {
             </button>
           </div>
         )}
-        <h1 data-testid="page-title">{ title }</h1>
       </header>
     </div>
   );

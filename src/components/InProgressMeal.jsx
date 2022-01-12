@@ -11,6 +11,7 @@ import IngredientsCards from '../cards/IngredientsCards';
 function InProgressMeal({ recipe, url }) {
   const [copied, setCopied] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
+  const [auxRender, setAuxRender] = useState(true);
   const [ingredientsUsed, setIngredientsUsed] = useState([]);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function InProgressMeal({ recipe, url }) {
       },
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [auxRender]);
 
   useEffect(() => {
     if (!localStorage.getItem('inProgressRecipes')) {
@@ -34,7 +35,6 @@ function InProgressMeal({ recipe, url }) {
     }
     setIngredientsUsed(
       () => {
-        // && recipe.idMeal
         if (localStorage.getItem('inProgressRecipes')) {
           const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
           if (inProgressRecipes && recipe.idMeal in inProgressRecipes.meals) {
@@ -56,7 +56,24 @@ function InProgressMeal({ recipe, url }) {
   }
 
   function isFavorite() {
-    return favRecipes.some(({ id }) => id.toString() === recipe.idMeal);
+    return favRecipes.some(({ id }) => {
+      if (typeof id === 'number') {
+        return id.toString() === recipe.idMeal;
+      }
+      return id === recipe.idMeal;
+    });
+  }
+
+  function addFavorite() {
+    const newFavorite = [...favRecipes, recipe];
+    setAuxRender(!auxRender);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
+  }
+
+  function removeFavorite({ name }) {
+    const rmFavorite = favRecipes.filter((receita) => receita.name !== name);
+    setAuxRender(!auxRender);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(rmFavorite));
   }
 
   return (
@@ -86,7 +103,7 @@ function InProgressMeal({ recipe, url }) {
             type="image"
             src={ blackHeartIcon }
             alt="blackHeartIcon"
-            onClick={ () => {} }
+            onClick={ () => { removeFavorite(recipe); } }
             data-testid="favorite-btn"
           />)
         : (
@@ -94,7 +111,7 @@ function InProgressMeal({ recipe, url }) {
             type="image"
             src={ whiteHeartIcon }
             alt="whiteHeartIcon"
-            onClick={ () => {} }
+            onClick={ addFavorite }
             data-testid="favorite-btn"
           />
         )}
