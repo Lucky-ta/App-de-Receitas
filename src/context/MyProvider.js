@@ -3,34 +3,58 @@ import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 import foodApiToSelect from '../services/searchMeals';
 import drinkApiToSelect from '../services/searchDrinks';
+import { getMealsCategories, getDrinksCategories } from '../services/getCategories';
 
 function Provider({ children }) {
+  const recipesDone = ({
+    meals: {},
+    cocktails: {},
+  });
+
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [results, setResults] = useState([]);
-  const [toogle, setToogle] = useState(true);
-  // serve para salvar o último botao clicado, ainda não foi usado
-  const [stateLocked, setStateLocked] = useState(false);
-
-  const [categories, setCategories] = useState({
-    meals: [],
-    drinks: [],
-  });
+  const [result, setResult] = useState([]);
+  const [mealsCategories, setMealsCategories] = useState([]);
+  const [drinksCategories, setDrinksCategories] = useState([]);
+  const [toggle, setToggle] = useState(false);
+  const [cat, setCat] = useState('');
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [inProgress, setInProgress] = useState(recipesDone);
+  const [favorites, setFavorites] = useState([]);
 
   const data = {
     meals,
     setMeals,
     drinks,
     setDrinks,
-    categories,
-    setCategories,
-    results,
-    setResults,
-    toogle,
-    setToogle,
-    stateLocked,
-    setStateLocked,
+    result,
+    setResult,
+    mealsCategories,
+    setMealsCategories,
+    drinksCategories,
+    setDrinksCategories,
+    toggle,
+    setToggle,
+    cat,
+    setCat,
+    doneRecipes,
+    setDoneRecipes,
+    inProgress,
+    setInProgress,
+    favorites,
+    setFavorites,
   };
+
+  useEffect(() => {
+    const fetchAPI = async () => {
+      const mealsResponse = await getMealsCategories();
+      const drinksResponse = await getDrinksCategories();
+
+      setMealsCategories(mealsResponse.meals);
+      setDrinksCategories(drinksResponse.drinks);
+    };
+    fetchAPI();
+  }, []);
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -49,15 +73,30 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
-    const fetchApi = async () => {
-      const mealsCategories = await foodApiToSelect('GET_CATEGORIES');
-      const drinksCategories = await drinkApiToSelect('GET_CATEGORIES');
-      setCategories({
-        meals: mealsCategories.meals,
-        drinks: drinksCategories.drinks,
-      });
-    };
-    fetchApi();
+    if (localStorage.doneRecipes) {
+      setDoneRecipes(JSON.parse(localStorage.doneRecipes));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.inProgressRecipes) {
+      setInProgress(JSON.parse(localStorage.inProgressRecipes));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      setFavorites(JSON.parse(localStorage.favoriteRecipes));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

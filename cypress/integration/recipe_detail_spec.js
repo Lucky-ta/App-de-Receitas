@@ -295,7 +295,7 @@ describe('40 - Implemente a solução de modo que caso a receita tenha sido inic
       onBeforeLoad(win) {
         const inProgressRecipes = {
           meals: {
-            52771: [],
+            52771: [],            
           },
         };
         localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
