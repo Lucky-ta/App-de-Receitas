@@ -41,7 +41,7 @@ code {
   flex-direction: column;
 }
 
-.top .centering{
+.top .centering {
   display: flex;
   flex-direction: column;
   text-align: center;

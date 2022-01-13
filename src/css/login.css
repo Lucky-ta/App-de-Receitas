@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Rouge+Script&display=swap');
+
+body {
+    background-image: url("../images/recipes.jpg");
+    background-repeat: no-repeat;
+    background-position-x: 30%;
+    background-size: 500px;
+}
+
+.login-field {
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0px, 150px);
+    text-align: center;
+    background-color: rgba(220, 220, 220, 0.20);
+  }
+   
+.login-btn {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border: none;
+    border-radius: 30px;
+    padding: .5rem 1.5rem;
+}
+
+input {
+    align-items: center;
+    border-radius: 10px;
+    width: 350px;
+    margin-bottom: 10px;
+    height: 50px;
+    padding: 10px;
+}
+
+h1 {
+    transform: translate(25px, 170px);
+    color: #CEF0D4;
+    font-family: 'Lobster', cursive; font-size: 60px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0 0 50px;
+    text-align: center;
+    text-shadow: 1px 1px 2px #082b34;
+}
+
+.form__label {
+    font-family: 'Roboto', sans-serif;
+     font-size: 1.2rem;
+     text-align: center;
+  }
