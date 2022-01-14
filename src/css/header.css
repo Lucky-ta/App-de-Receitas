@@ -1,54 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Rouge+Script&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
 }
 
 .header {
-  align-items: stretch;
-  background-color: rgb(194, 194, 194);
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: start;
-}
-
-.header-name {
-  font-size: 2em;
-  margin-bottom: 0;
-  margin-left: 20%;
-  margin-right: 20%;
-  max-width: 60%;
+  background-color: rgb(194, 194, 194); 
+ display: flex; 
+ width: 100%; 
+ height: 58px; 
+  align-items: center;
+  justify-content: space-between; 
+   margin-bottom: 20px;
 }
 
 .profile-icon {
-  margin-left: 3%;
+  display: flex;
+  width: 40px;
+  height: 50px;
+  left: 15px;
+  top: 12px;
 }
 
 .search-icon {
-  margin-right: 3%;
-}
-
-.search-field {
   display: flex;
-  flex-direction: column;
+  width: 40px;
+  height: 50px;
 }
 
-.search-field input {
-  border-radius: 6px;
+.header-name {
+  font-family: 'Lobster', cursive; font-size: 40px;
 }
 
-.search-field button {
-  background-color: rgb(194, 194, 194);
-  border-radius: 6px;
-}
-
-.filter-field {
+.header-title-container {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  transform: translate(0px, 0px);
+}
+
+.header-search-input-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.header-search-input {
+  border-radius: 6px;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.form-label {
+  font-family: 'Roboto', sans-serif;
+   font-size: 1.2rem;
+   text-align: initial;
+   padding-left: 10px;
+}
+
+.radius-btns-field {
+  display: flex;
+  width: 100%;
+  align-items: center;
   justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.filter-field label {
-  margin-bottom: 1.3%;
-  margin-top: 1.3%;
+input[type=radio] {
+  display: flex;
+  border: 0px;
+  width: 30px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.radio-btn {
+  display: flex;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+} 
+
+.header-search-btn-container {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  margin-bottom: 20px;
+  text-align: center;
+  text-align: center;
+}
+
+.header-search-btn {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  justify-content: center;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  border-radius: 6px;
 }

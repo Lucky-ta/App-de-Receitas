@@ -8,9 +8,9 @@ import '../css/footer.css';
 
 function Footer() {
   return (
-    <div>
+    <div className="footer-container">
       <footer data-testid="footer" className="footer">
-        <Link to="/bebidas">
+        <Link className="footer-link" to="/bebidas">
           <input
             type="image"
             data-testid="drinks-bottom-btn"

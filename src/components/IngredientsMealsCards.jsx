@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import foodApiToSelect from '../services/searchMeals';
 import MyContext from '../context/MyContext';
+import '../css/categoriesBtns.css';
 
 function IngredientsMealsCards({ value }) {
   const { setMeals } = useContext(MyContext);

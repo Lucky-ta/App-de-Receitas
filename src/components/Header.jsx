@@ -53,7 +53,7 @@ function Header({ title, isRender }) {
   }
 
   return (
-    <div>
+    <div className="header-body">
       <header>
         <div className="header">
           <input
@@ -64,8 +64,10 @@ function Header({ title, isRender }) {
             onClick={ profileRedirect }
             className="profile-icon"
           />
-          <h1 data-testid="page-title" className="header-name">{ title }</h1>
-          { isRender && (
+          <div className="header-title-container">
+            <h1 data-testid="page-title" className="header-name">{ title }</h1>
+          </div>
+          { isRender ? (
             <input
               data-testid="search-top-btn"
               type="image"
@@ -74,19 +76,28 @@ function Header({ title, isRender }) {
               onClick={ () => setSearch(!search) }
               className="search-icon"
             />
+          ) : (
+            <span
+              className="search-icon"
+            />
           )}
         </div>
         { search && (
           <div className="search-field">
-            <input
-              data-testid="search-input"
-              type="text"
-              value={ input }
-              onChange={ ({ target }) => setInput(target.value) }
-            />
-            <div className="filter-field">
-              <label htmlFor="INGREDIENT">
+            <div className="header-search-input-container">
+              <input
+                className="header-search-input form-label"
+                data-testid="search-input"
+                type="text"
+                value={ input }
+                onChange={ ({ target }) => setInput(target.value) }
+                placeholder="Digitie alguma receita..."
+              />
+            </div>
+            <div className="radius-btns-field">
+              <label className="radio-btn" htmlFor="INGREDIENT">
                 <input
+                  className="radio-btn"
                   name="radio-button"
                   data-testid="ingredient-search-radio"
                   id="INGREDIENT"
@@ -97,7 +108,7 @@ function Header({ title, isRender }) {
                 />
                 Ingrediente
               </label>
-              <label htmlFor="NAME">
+              <label className="radio-btn" htmlFor="NAME">
                 <input
                   name="radio-button"
                   data-testid="name-search-radio"
@@ -109,7 +120,7 @@ function Header({ title, isRender }) {
                 />
                 Nome
               </label>
-              <label htmlFor="FIRST_LETTER">
+              <label className="radio-btn" htmlFor="FIRST_LETTER">
                 <input
                   name="radio-button"
                   data-testid="first-letter-search-radio"
@@ -122,13 +133,16 @@ function Header({ title, isRender }) {
                 Primeira letra
               </label>
             </div>
-            <button
-              data-testid="exec-search-btn"
-              type="button"
-              onClick={ onClickSearchButton }
-            >
-              Buscar
-            </button>
+            <div className="header-search-btn">
+              <button
+                className="header-search-btn"
+                data-testid="exec-search-btn"
+                type="button"
+                onClick={ onClickSearchButton }
+              >
+                Buscar
+              </button>
+            </div>
           </div>
         )}
       </header>

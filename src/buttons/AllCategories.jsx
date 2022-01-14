@@ -21,6 +21,7 @@ function AllCategories() {
 
   return (
     <button
+      className="categories-buttons"
       type="button"
       onClick={ () => filterAllCategories() }
       data-testid="All-category-filter"

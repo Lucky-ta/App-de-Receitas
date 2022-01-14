@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
 import { MAX_OBJECT_KEYS } from '../global/constants';
-import '../index.css';
+import '../css/cards.css';
 
 function DrinkCards({ data }) {
   const { drinks } = useContext(MyContext);
@@ -14,41 +14,52 @@ function DrinkCards({ data }) {
   function showCards() {
     const cards = drinks.filter((card, index) => index <= size);
     return (
-      cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-        <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
-          { isRecommendation
-            ? (
-              <div
-                data-testid={ `${index}-recomendation-card` }
-                className="item top"
-              >
-                <img
-                  data-testid={ `${index}-card-img` }
-                  style={ { height: '5em' } }
-                  src={ strDrinkThumb }
-                  alt={ strDrink }
-                />
-                <p
-                  data-testid={ `${index}-recomendation-title` }
-                  className="centering"
+      <div className="cards-container">
+        {cards.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+          <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
+            { isRecommendation
+              ? (
+                <div
+                  data-testid={ `${index}-recomendation-card` }
+                  className="cards"
                 >
-                  { strDrink }
-                </p>
-              </div>
-            )
-            : (
-              <div data-testid={ `${index}-recipe-card` }>
-                <img
-                  data-testid={ `${index}-card-img` }
-                  style={ { height: '5em' } }
-                  src={ strDrinkThumb }
-                  alt={ strDrink }
-                />
-                <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-              </div>
-            )}
-        </Link>
-      ))
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    style={ { height: '5em' } }
+                    src={ strDrinkThumb }
+                    alt={ strDrink }
+                  />
+                  <p
+                    data-testid={ `${index}-recomendation-title` }
+                    // className="centering"
+                  >
+                    { strDrink }
+                  </p>
+                </div>
+              )
+              : (
+                <div className="card-container" data-testid={ `${index}-recipe-card` }>
+                  <img
+                    className="cards"
+                    data-testid={ `${index}-card-img` }
+                    style={ { height: '5em' } }
+                    src={ strDrinkThumb }
+                    alt={ strDrink }
+                  />
+                  <div className="card-title">
+                    <p
+                      className="card-text"
+                      data-testid={ `${index}-card-name` }
+                    >
+                      { strDrink }
+
+                    </p>
+                  </div>
+                </div>
+              )}
+          </Link>
+        ))}
+      </div>
     );
   }
 

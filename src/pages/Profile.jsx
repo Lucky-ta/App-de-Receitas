@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../css/profile.css';
+import '../App.css';
 
 function Profile() {
   const history = useHistory();
@@ -26,10 +27,12 @@ function Profile() {
   }
 
   return (
-    <div>
+    <div className="profile-body">
       <Header title="Perfil" isRender={ false } />
-      <h3 data-testid="profile-email" className="user">{verifyEmail()}</h3>
       <div className="user-options">
+        <div className="user-container">
+          <h3 data-testid="profile-email" className="user">{verifyEmail()}</h3>
+        </div>
         <button
           type="button"
           data-testid="profile-done-btn"

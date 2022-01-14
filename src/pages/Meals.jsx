@@ -1,10 +1,10 @@
 import React from 'react';
 import MealCards from '../cards/MealCards';
-import AllCategories from '../buttons/AllCategories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MealsCategories from '../buttons/MealsCategories';
 import { MAX_CARDS } from '../global/constants';
+import '../App.css';
 
 export default function Meals() {
   const recommendation = {
@@ -12,9 +12,8 @@ export default function Meals() {
     size: MAX_CARDS,
   };
   return (
-    <div>
+    <div className="meals-body">
       <Header title="Comidas" isRender />
-      <AllCategories />
       <MealsCategories />
       <MealCards data={ recommendation } />
       <Footer />

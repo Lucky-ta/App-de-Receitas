@@ -1,0 +1,13 @@
+.categories-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.categories-buttons {
+    width: 100px;
+    border-radius: 10px;
+    margin: 5px;
+}

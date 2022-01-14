@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { MAX_CATEGORIES_LENGHT } from '../global/constants';
 import foodApiToSelect from '../services/searchMeals';
-
+import AllCategories from './AllCategories';
+import '../css/categoriesBtns.css';
 import MyContext from '../context/MyContext';
 
 function MealsCategories() {
@@ -25,9 +26,14 @@ function MealsCategories() {
   }
 
   return (
-    <div>
+    <div
+      className="categories-field"
+
+    >
+      <AllCategories />
       {mealsCategories.slice(0, MAX_CATEGORIES_LENGHT).map(({ strCategory }, index) => (
         <button
+          className="categories-buttons"
           id={ strCategory }
           type="button"
           key={ index }

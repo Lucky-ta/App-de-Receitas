@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyProvider from './context/MyProvider';
 import Routes from './routes/Routes';

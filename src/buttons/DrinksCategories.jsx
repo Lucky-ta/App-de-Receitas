@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import drinkApiToSelect from '../services/searchDrinks';
-
+import AllCategories from './AllCategories';
 import MyContext from '../context/MyContext';
 import { MAX_CATEGORIES_LENGHT } from '../global/constants';
+import '../css/categoriesBtns.css';
 
 function DrinksCategories() {
   const { drinksCategories,
@@ -25,9 +26,13 @@ function DrinksCategories() {
   }
 
   return (
-    <div>
+    <div
+      className="categories-field"
+    >
+      <AllCategories />
       {drinksCategories.slice(0, MAX_CATEGORIES_LENGHT).map(({ strCategory }, index) => (
         <button
+          className="categories-buttons"
           type="button"
           key={ index }
           data-testid={ `${strCategory}-category-filter` }

@@ -31,40 +31,44 @@ function Login() {
   }
 
   return (
-    <form>
-      <h1>App de Receitas</h1>
-      <fieldset className="login-field">
-        <label className="form__label" htmlFor="email-input">
-          <input
-            id="email-input"
-            data-testid="email-input"
-            type="email"
-            onChange={ ({ target }) => setEmail(target.value) }
-            value={ email }
-            placeholder="Informe o seu e-mail"
-          />
-        </label>
-        <label className="form__label" htmlFor="password-input">
-          <input
-            id="password-input"
-            data-testid="password-input"
-            type="password"
-            onChange={ ({ target }) => setPassword(target.value) }
-            value={ password }
-            placeholder="Digite sua senha"
-          />
-        </label>
-        <button
-          className="login-btn"
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ validateInputs() }
-          onClick={ onClickButton }
-        >
-          Entrar
-        </button>
-      </fieldset>
-    </form>
+    <div>
+      <form>
+        <h1 className="login-title">App de Receitas</h1>
+        <fieldset className="login-field">
+          <label className="form__label" htmlFor="email-input">
+            <input
+              className="login-inputs"
+              id="email-input"
+              data-testid="email-input"
+              type="email"
+              onChange={ ({ target }) => setEmail(target.value) }
+              value={ email }
+              placeholder="Informe o seu e-mail"
+            />
+          </label>
+          <label className="form__label" htmlFor="password-input">
+            <input
+              className="login-inputs"
+              id="password-input"
+              data-testid="password-input"
+              type="password"
+              onChange={ ({ target }) => setPassword(target.value) }
+              value={ password }
+              placeholder="Digite sua senha"
+            />
+          </label>
+          <button
+            className="login-btn"
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ validateInputs() }
+            onClick={ onClickButton }
+          >
+            Entrar
+          </button>
+        </fieldset>
+      </form>
+    </div>
   );
 }
 
