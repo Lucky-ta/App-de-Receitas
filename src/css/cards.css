@@ -16,7 +16,6 @@
     -moz-border-radius-topright: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-
 }
 
 .card-container {
@@ -29,13 +28,23 @@
     background-color: white;
 }
 
+.card-container-drinks {
+    width: 150px;
+    height: 125px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 1.9px 3.8px 3.8px hsl(0deg 0% 0% / 0.44);
+    color: black;
+    background-color: white;
+}
+
 .card-title {
     text-align: initial;
-
 }
 
 .card-text {
-    transform: translate(6px, 9px);
+    margin-top: 10px;
+    margin-left: 10px;
     max-width: 15ch;
     overflow: hidden;
     text-overflow: ellipsis;

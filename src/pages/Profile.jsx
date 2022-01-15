@@ -2,8 +2,21 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import '../css/profile.css';
 import '../App.css';
+
+const classObject = {
+  headerProfilerContainer: 'profile-header header-profile-container',
+  profileIcon: 'profile-profile-icon',
+  headerTitleContainer: 'profile-title-container',
+  headerTitle: 'header-name header-title-profile',
+  searchIcon: 'search-icon',
+  searchContainer: 'search-field',
+  headerSearchInṕutContainer: 'header-search-input-container',
+  headerSearchInput: 'header-search-input form-label',
+  radioBtnsContainer: 'radius-btns-field',
+  radioButtons: 'radio-btn',
+  headerSearchButton: 'header-search-btn',
+};
 
 function Profile() {
   const history = useHistory();
@@ -28,7 +41,7 @@ function Profile() {
 
   return (
     <div className="profile-body">
-      <Header title="Perfil" isRender={ false } />
+      <Header title="Perfil" isRender={ false } classes={ classObject } />
       <div className="user-options">
         <div className="user-container">
           <h3 data-testid="profile-email" className="user">{verifyEmail()}</h3>

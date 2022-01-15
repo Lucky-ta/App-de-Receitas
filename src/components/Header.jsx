@@ -8,7 +8,7 @@ import foodApiToSelect from '../services/searchMeals';
 import drinkApiToSelect from '../services/searchDrinks';
 import '../css/header.css';
 
-function Header({ title, isRender }) {
+function Header({ title, isRender, classes }) {
   const [input, setInput] = useState('');
   const [search, setSearch] = useState(false);
 
@@ -53,40 +53,42 @@ function Header({ title, isRender }) {
   }
 
   return (
-    <div className="header-body">
+    <div>
       <header>
-        <div className="header">
+        <div className={ classes.headerProfilerContainer }>
           <input
             type="image"
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="profileIcon"
             onClick={ profileRedirect }
-            className="profile-icon"
+            className={ classes.profileIcon }
           />
-          <div className="header-title-container">
-            <h1 data-testid="page-title" className="header-name">{ title }</h1>
+          <div className={classes.headerTitleContainer}>
+            <h1
+              data-testid="page-title"
+              className={classes.headerTitle}
+            >
+              { title }
+
+            </h1>
           </div>
-          { isRender ? (
+          { isRender && (
             <input
               data-testid="search-top-btn"
               type="image"
               src={ searchIcon }
               alt="searchIcon"
               onClick={ () => setSearch(!search) }
-              className="search-icon"
-            />
-          ) : (
-            <span
-              className="search-icon"
+              className={classes.searchIcon}
             />
           )}
         </div>
         { search && (
-          <div className="search-field">
-            <div className="header-search-input-container">
+          <div className={classes.searchContainer}>
+            <div className={classes.headerSearchInṕutContainer}>
               <input
-                className="header-search-input form-label"
+                className={classes.headerSearchInput}
                 data-testid="search-input"
                 type="text"
                 value={ input }
@@ -94,10 +96,10 @@ function Header({ title, isRender }) {
                 placeholder="Digitie alguma receita..."
               />
             </div>
-            <div className="radius-btns-field">
-              <label className="radio-btn" htmlFor="INGREDIENT">
+            <div className={classes.radioBtnsContainer}>
+              <label className={classes.radioButtons} htmlFor="INGREDIENT">
                 <input
-                  className="radio-btn"
+                  className={classes.radioButtons}
                   name="radio-button"
                   data-testid="ingredient-search-radio"
                   id="INGREDIENT"
@@ -108,7 +110,7 @@ function Header({ title, isRender }) {
                 />
                 Ingrediente
               </label>
-              <label className="radio-btn" htmlFor="NAME">
+              <label className={classes.radioButtons} htmlFor="NAME">
                 <input
                   name="radio-button"
                   data-testid="name-search-radio"
@@ -120,7 +122,7 @@ function Header({ title, isRender }) {
                 />
                 Nome
               </label>
-              <label className="radio-btn" htmlFor="FIRST_LETTER">
+              <label className={classes.radioButtons} htmlFor="FIRST_LETTER">
                 <input
                   name="radio-button"
                   data-testid="first-letter-search-radio"
@@ -133,9 +135,9 @@ function Header({ title, isRender }) {
                 Primeira letra
               </label>
             </div>
-            <div className="header-search-btn">
+            <div className={classes.headerSearchButton}>
               <button
-                className="header-search-btn"
+                className={classes.headerSearchButton}
                 data-testid="exec-search-btn"
                 type="button"
                 onClick={ onClickSearchButton }

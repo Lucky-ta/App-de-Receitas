@@ -1,3 +1,4 @@
+
 .categories-field {
     display: flex;
     align-items: center;
@@ -7,7 +8,9 @@
 }
 
 .categories-buttons {
+    height: 53px;
     width: 100px;
     border-radius: 10px;
     margin: 5px;
+    word-wrap: break-word;
 }

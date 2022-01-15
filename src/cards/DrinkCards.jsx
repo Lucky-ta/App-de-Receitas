@@ -38,7 +38,7 @@ function DrinkCards({ data }) {
                 </div>
               )
               : (
-                <div className="card-container" data-testid={ `${index}-recipe-card` }>
+                <div className="card-container-drinks" data-testid={ `${index}-recipe-card` }>
                   <img
                     className="cards"
                     data-testid={ `${index}-card-img` }
