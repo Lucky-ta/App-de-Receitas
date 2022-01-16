@@ -4,6 +4,20 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import drinkApiToSelect from '../services/searchDrinks';
 
+const classObject = {
+  headerProfilerContainer: 'profile-header header-profile-container',
+  profileIcon: 'profile-profile-icon',
+  headerTitleContainer: 'explore-meals-title-container',
+  headerTitle: 'header-name header-title-profile',
+  searchIcon: 'search-icon',
+  searchContainer: 'search-field',
+  headerSearchInṕutContainer: 'header-search-input-container',
+  headerSearchInput: 'header-search-input form-label',
+  radioBtnsContainer: 'radius-btns-field',
+  radioButtons: 'radio-btn',
+  headerSearchButton: 'header-search-btn',
+};
+
 function ExploreDrinks({ history }) {
   const [random, setRandom] = useState([]);
 
@@ -14,8 +28,6 @@ function ExploreDrinks({ history }) {
     })();
   }, []);
 
-  // console.log(random);
-
   function redirectToExplore(type, explore) {
     if (explore) {
       history.push(`/explorar/bebidas/${type}`);
@@ -25,21 +37,23 @@ function ExploreDrinks({ history }) {
   }
   return (
     <div>
-      <Header title="Explorar Bebidas" isRender={ false } />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => redirectToExplore('ingredientes', true) }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => redirectToExplore(random, false) }
-      >
-        Me Surpreenda!
-      </button>
+      <Header title="Explorar Bebidas" isRender={ false } classes={ classObject } />
+      <div className="user-options">
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => redirectToExplore('ingredientes', true) }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => redirectToExplore(random, false) }
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <Footer />
     </div>
   );

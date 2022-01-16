@@ -6,6 +6,20 @@ import Header from '../components/Header';
 import { INTERVAL } from '../global/constants';
 import shareIcon from '../images/shareIcon.svg';
 
+const classObject = {
+  headerProfilerContainer: 'profile-header header-profile-container',
+  profileIcon: 'profile-profile-icon',
+  headerTitleContainer: 'done-recipes-title-container',
+  headerTitle: 'header-name header-title-profile',
+  searchIcon: 'search-icon',
+  searchContainer: 'search-field',
+  headerSearchInṕutContainer: 'header-search-input-container',
+  headerSearchInput: 'header-search-input form-label',
+  radioBtnsContainer: 'radius-btns-field',
+  radioButtons: 'radio-btn',
+  headerSearchButton: 'header-search-btn',
+};
+
 function RecipesDone() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   // const [auxRender, setAuxRender] = useState(true);
@@ -34,7 +48,7 @@ function RecipesDone() {
 
   return (
     <div>
-      <Header title="Receitas Feitas" isRender={ false } />
+      <Header title="Receitas Feitas" isRender={ false } classes={ classObject } />
       <FilterHeader setFilterType={ setFilterType } />
       {doneRecipes
         .filter((recipe) => recipe.type.includes(filterType))

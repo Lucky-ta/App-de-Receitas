@@ -7,6 +7,20 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import { INTERVAL } from '../global/constants';
 
+const classObject = {
+  headerProfilerContainer: 'profile-header header-profile-container',
+  profileIcon: 'profile-profile-icon',
+  headerTitleContainer: 'favorites-recipes-title-container',
+  headerTitle: 'header-name header-title-profile',
+  searchIcon: 'search-icon',
+  searchContainer: 'search-field',
+  headerSearchInṕutContainer: 'header-search-input-container',
+  headerSearchInput: 'header-search-input form-label',
+  radioBtnsContainer: 'radius-btns-field',
+  radioButtons: 'radio-btn',
+  headerSearchButton: 'header-search-btn',
+};
+
 function FavoriteRecipes() {
   const [favRecipes, setFavRecipes] = useState([]);
   const [auxRender, setAuxRender] = useState(true);
@@ -39,8 +53,7 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      <Header title="Receitas Favoritas" isRender={ false } />
-      FavoriteRecipes Page
+      <Header title="Receitas Favoritas" isRender={ false } classes={ classObject } />
       <FilterHeader setFilterType={ setFilterType } />
       {favRecipes
         .filter((recipe) => recipe.type.includes(filterType))

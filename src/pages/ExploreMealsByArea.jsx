@@ -4,6 +4,21 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import foodApiToSelect from '../services/searchMeals';
 import { TWELVE } from '../global/constants';
+import '../css/cards.css';
+
+const classObject = {
+  headerProfilerContainer: 'header header-profile-container',
+  profileIcon: 'profile-icon',
+  headerTitleContainer: 'explore-by-area-title-container',
+  headerTitle: 'explore-by-area-title header-title-profile',
+  searchIcon: 'search-icon',
+  searchContainer: 'search-field',
+  headerSearchInṕutContainer: 'header-search-input-container',
+  headerSearchInput: 'header-search-input form-label',
+  radioBtnsContainer: 'radius-btns-field',
+  radioButtons: 'radio-btn',
+  headerSearchButton: 'header-search-btn',
+};
 
 function ExploreMealsByArea() {
   const [areas, setAreas] = useState([]);
@@ -38,44 +53,47 @@ function ExploreMealsByArea() {
 
   function renderSelect() {
     return (
-      <select
-        data-testid="explore-by-area-dropdown"
-        value={ optionArea }
-        onChange={ ({ target }) => setOptionArea(target.value) }
-      >
-        {areas.map((area) => {
-          console.log(area);
-          if (typeof area === 'string') {
+      <div className="select-container">
+        <select
+          data-testid="explore-by-area-dropdown"
+          value={ optionArea }
+          onChange={ ({ target }) => setOptionArea(target.value) }
+        >
+          {areas.map((area) => {
+            console.log(area);
+            if (typeof area === 'string') {
+              return (
+                <option
+                  key={ `${area}-key` }
+                  data-testid={ `${area}-option` }
+                  value={ area }
+                >
+                  {area}
+                </option>
+
+              );
+            }
             return (
               <option
-                key={ `${area}-key` }
-                data-testid={ `${area}-option` }
-                value={ area }
+                key={ `${area.strArea}-key` }
+                data-testid={ `${area.strArea}-option` }
+                value={ area.strArea }
               >
-                {area}
+                {area.strArea}
               </option>
-
             );
-          }
-          return (
-            <option
-              key={ `${area.strArea}-key` }
-              data-testid={ `${area.strArea}-option` }
-              value={ area.strArea }
-            >
-              {area.strArea}
-            </option>
-          );
-        })}
-      </select>
+          })}
+        </select>
+      </div>
     );
   }
 
   function renderCards() {
     return (
-      <div>
+      <div className="cards-container">
         {mealsByArea.map(({ strMeal, strMealThumb, idMeal }, index) => (
           <div
+            className="card-container"
             role="button"
             tabIndex={ index }
             onClick={ () => history.push(`/comidas/${idMeal}`) }
@@ -84,12 +102,15 @@ function ExploreMealsByArea() {
             data-testid={ `${index}-recipe-card` }
           >
             <img
+              className="cards"
               width="150px"
               data-testid={ `${index}-card-img` }
               src={ strMealThumb }
               alt={ strMeal }
             />
-            <h3 data-testid={ `${index}-card-name` }>{strMeal}</h3>
+            <div className="card-title">
+              <h3 className="card-text" data-testid={ `${index}-card-name` }>{strMeal}</h3>
+            </div>
           </div>
         ))}
       </div>
@@ -98,7 +119,7 @@ function ExploreMealsByArea() {
 
   return (
     <div>
-      <Header title="Explorar Origem" isRender />
+      <Header title="Explorar Origem" isRender classes={ classObject } />
       {renderSelect()}
       {renderCards()}
       <Footer />

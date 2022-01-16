@@ -11,7 +11,7 @@ function FilterHeader({ setFilterType }) {
   }
 
   return (
-    <div>
+    <div className="user-options">
       <button
         type="button"
         data-testid="filter-by-all-btn"

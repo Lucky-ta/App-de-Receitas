@@ -8,6 +8,8 @@ html,body {
   width: 100%;
   /* overflow: hidden;  */
   overflow: auto;
+  background-color: rgb(140, 46, 46);
+
 }
 
 .meals-body {

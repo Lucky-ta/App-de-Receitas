@@ -4,7 +4,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
 }
 
 .header {
@@ -132,6 +131,55 @@ input[type=radio] {
   height: 50px;
   left: 15px;
   top: 12px;
-  margin-left: 10px;
-  /* transform: translate(-40px, 0px); */
+  margin-left: 5px;
+}
+
+.explore-header-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 94px;
+}
+
+.explore-meals-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 18px;
+}
+
+.done-recipes-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 45px;
+}
+
+.favorites-recipes-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 11px;
+}
+
+.explore-meals-by-ingredient-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.explore-meals-by-ingredient-title {
+  font-family: 'Lobster', cursive; font-size: 33px;
+}
+
+.explore-by-area-title-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.explore-by-area-title {
+  font-family: 'Lobster', cursive; font-size: 33px;
 }

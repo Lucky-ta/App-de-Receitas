@@ -1,10 +1,10 @@
 
 .explore-btns {
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 15%;
+  margin-top: 180px;
 }
 
 .explore-btns button {

@@ -2,7 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import '../App.css';
+// import '../App.css';
+import '../css/profile.css';
 
 const classObject = {
   headerProfilerContainer: 'profile-header header-profile-container',
@@ -40,7 +41,7 @@ function Profile() {
   }
 
   return (
-    <div className="profile-body">
+    <div>
       <Header title="Perfil" isRender={ false } classes={ classObject } />
       <div className="user-options">
         <div className="user-container">
