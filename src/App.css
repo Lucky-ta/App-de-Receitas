@@ -1,21 +1,12 @@
 
 html,body {
-  /* box-sizing: border-box; */
   height: 100% !important;
-
   margin: 0px;
   padding: 0px;
   width: 100%;
-  /* overflow: hidden;  */
   overflow: auto;
-  background-color: rgb(140, 46, 46);
-
 }
 
 .meals-body {
   background-color: rgb(140, 46, 46);
 }
-
-/* .profile-body {
-  background-color: rgb(140, 46, 46);
-} */

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
 import { MAX_OBJECT_KEYS } from '../global/constants';
 import '../css/cards.css';
+import '../index.css';
 
-function DrinkCards({ data }) {
+function DrinkCards({ data, classes }) {
   const { drinks } = useContext(MyContext);
   const history = useHistory();
   const { isRecommendation, size } = data;
@@ -21,15 +22,17 @@ function DrinkCards({ data }) {
               ? (
                 <div
                   data-testid={ `${index}-recomendation-card` }
-                  className="cards"
+                  className={ classes.length !== 0 ? classes : 'cards' }
                 >
                   <img
+                    className="card-container-drinks"
                     data-testid={ `${index}-card-img` }
                     style={ { height: '5em' } }
                     src={ strDrinkThumb }
                     alt={ strDrink }
                   />
                   <p
+                    className="centering"
                     data-testid={ `${index}-recomendation-title` }
                   >
                     { strDrink }

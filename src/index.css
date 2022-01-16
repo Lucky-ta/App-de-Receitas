@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  overflow: auto;
 }
 
 code {
@@ -13,38 +13,27 @@ code {
     monospace;
 }
 
-.start-recipe-btn  {
-  position: fixed;
-  bottom: 0px;
-}
-
-.caroussel {
+.carousel-container {
   display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
+  width: 200px;
+  margin-left:68px;
+  border-radius: 10px;
 }
 
-.caroussel .item {
-  display: flex;
+.carousel-img {
+  border-radius: 10px;
+  height: 200px;
 }
 
-.caroussel .item.hidden {
-  display: none;
-}
-
-.top {
-  display: flex;
-  flex-direction: column;
-}
-
-.top .centering {
-  display: flex;
-  flex-direction: column;
+.caption-container {
+  display: block;
   text-align: center;
 }
 
-.meals-details-body {
-  background-image: none;
-  background-color: rgb(237, 235, 235);
-
+.carousel-text {
+  font-size: 20px;
+  justify-content: center;
+  background-color: rgba(247, 234, 234, 0.515);
+  border-radius: 10px;
+  color: rgb(2, 2, 2)
 }

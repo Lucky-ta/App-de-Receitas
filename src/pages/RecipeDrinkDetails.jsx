@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
+import { Carousel } from 'react-bootstrap';
 import MyContext from '../context/MyContext';
 import Buttons from '../recipeDetailsComponents/Buttons';
 import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
 import Ingredients from '../recipeDetailsComponents/Ingredients';
 import getApi from '../services/getApi';
 import '../index.css';
-import MealCards from '../cards/MealCards';
 
 function RecipeDrinkDetails({ match }) {
   const [filter, setFilter] = useState([]);
@@ -23,6 +23,7 @@ function RecipeDrinkDetails({ match }) {
 
   const eleven = 11;
   const fifteen = 15;
+  const six = 6;
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -118,31 +119,31 @@ function RecipeDrinkDetails({ match }) {
     type: 'bebida',
   };
 
-  const recommendation = {
-    isRecommendation: true,
-    size: 5,
-  };
+  // const recommendation = {
+  //   isRecommendation: true,
+  //   size: 5,
+  // };
 
   return (
-    <div>
-      <ImageAndTitle
-        img={ strDrinkThumb }
-        title={ strDrink }
-      />
-      <h2 data-testid="recipe-category">
-        { strAlcoholic }
-      </h2>
+    <div className="meals-details-body">
+      <ImageAndTitle img={ strDrinkThumb } title={ strDrink } />
       <Buttons data={ bundle } />
-      <h3 data-testid="recipe-category">{ strCategory }</h3>
+      <h3 className="details-category" data-testid="recipe-category">
+        { strAlcoholic }
+      </h3>
+      <h3 className="details-category" data-testid="recipe-category">{ strCategory }</h3>
       <Ingredients ingredients={ concatArrays } />
-      <h4 data-testid="instructions">{ strInstructions }</h4>
-
-      <div data-testid="video">
+      <h1 className="details-ingredient-title">Instructions</h1>
+      <div className="details-ingredients-container">
+        <h4 className="details-list" data-testid="instructions">{ strInstructions }</h4>
+      </div>
+      <h1 className="details-ingredient-title"> Video </h1>
+      <div className="details-video-container" data-testid="video">
         { strYoutube !== null
           && (
             <div>
-              <h1> Youtube Embed </h1>
               <YouTube
+                className="details-video"
                 videoId={ getId(`${strYoutube}`) }
               />
             </div>
@@ -150,19 +151,25 @@ function RecipeDrinkDetails({ match }) {
       </div>
 
       <div
-        className="caroussel"
+        className="carousel-container"
       >
-        { meals.slice(0, 1).map((index, i) => (
-          <MealCards key={ i } data={ recommendation } />
-        ))}
+        <Carousel>
+          { meals.slice(0, six).map((index, i) => (
+            <Carousel.Item className="carousel-item" key={ i }>
+              <Link to={ `/comidas/${index.idMeal}` } key={ i }>
+                <img
+                  className="d-block w-100 carousel-img"
+                  src={ index.strMealThumb }
+                  alt="First slide"
+                />
+                <Carousel.Caption className="caption-container">
+                  <h3 className="carousel-text">{index.strMeal}</h3>
+                </Carousel.Caption>
+              </Link>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </div>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       { !Object.keys(cocktails).some((obj) => obj === idDrink)
         ? (
           <Link to={ `/bebidas/${id}/in-progress` }>
@@ -191,7 +198,6 @@ function RecipeDrinkDetails({ match }) {
     </div>
   );
 }
-
 RecipeDrinkDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
