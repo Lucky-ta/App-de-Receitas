@@ -109,7 +109,12 @@ function ExploreMealsByArea() {
               alt={ strMeal }
             />
             <div className="card-title">
-              <h3 className="card-text" data-testid={ `${index}-card-name` }>{strMeal}</h3>
+              <h3
+                className="card-text"
+                data-testid={ `${index}-card-name` }
+              >
+                {strMeal}
+              </h3>
             </div>
           </div>
         ))}

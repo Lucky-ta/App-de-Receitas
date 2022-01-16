@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import foodApiToSelect from '../services/searchMeals';
@@ -35,12 +36,24 @@ function IngredientsMealsCards({ value }) {
             alt={ ingredient.strDescription }
           />
           <div className="ingredient-title-container">
-            <h3 className="ingredient-title" data-testid={ `${index}-card-name` }>{ingredient.strIngredient}</h3>
+            <h3
+              className="ingredient-title"
+              data-testid={ `${index}-card-name` }
+            >
+              {ingredient.strIngredient}
+
+            </h3>
           </div>
         </div>
       ))}
     </div>
   );
 }
+
+IngredientsMealsCards.propTypes = {
+  value: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+};
 
 export default IngredientsMealsCards;

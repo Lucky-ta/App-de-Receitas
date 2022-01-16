@@ -6,10 +6,10 @@ import IngredientsDrinksCards from '../components/IngredientsDrinksCards';
 import { TWELVE } from '../global/constants';
 
 const classObject = {
-  headerProfilerContainer: 'profile-header header-profile-container',
-  profileIcon: 'profile-profile-icon',
-  headerTitleContainer: 'explore-meals-title-container',
-  headerTitle: 'header-name header-title-profile',
+  headerProfilerContainer: 'header header-profile-container',
+  profileIcon: 'profile-icon',
+  headerTitleContainer: 'explore-by-area-title-container',
+  headerTitle: 'explore-by-area-title header-title-profile',
   searchIcon: 'search-icon',
   searchContainer: 'search-field',
   headerSearchInṕutContainer: 'header-search-input-container',

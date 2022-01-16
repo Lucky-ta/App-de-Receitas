@@ -64,10 +64,10 @@ function Header({ title, isRender, classes }) {
             onClick={ profileRedirect }
             className={ classes.profileIcon }
           />
-          <div className={classes.headerTitleContainer}>
+          <div className={ classes.headerTitleContainer }>
             <h1
               data-testid="page-title"
-              className={classes.headerTitle}
+              className={ classes.headerTitle }
             >
               { title }
 
@@ -80,15 +80,15 @@ function Header({ title, isRender, classes }) {
               src={ searchIcon }
               alt="searchIcon"
               onClick={ () => setSearch(!search) }
-              className={classes.searchIcon}
+              className={ classes.searchIcon }
             />
           )}
         </div>
         { search && (
-          <div className={classes.searchContainer}>
-            <div className={classes.headerSearchInṕutContainer}>
+          <div className={ classes.searchContainer }>
+            <div className={ classes.headerSearchInṕutContainer }>
               <input
-                className={classes.headerSearchInput}
+                className={ classes.headerSearchInput }
                 data-testid="search-input"
                 type="text"
                 value={ input }
@@ -96,10 +96,10 @@ function Header({ title, isRender, classes }) {
                 placeholder="Digitie alguma receita..."
               />
             </div>
-            <div className={classes.radioBtnsContainer}>
-              <label className={classes.radioButtons} htmlFor="INGREDIENT">
+            <div className={ classes.radioBtnsContainer }>
+              <label className={ classes.radioButtons } htmlFor="INGREDIENT">
                 <input
-                  className={classes.radioButtons}
+                  className={ classes.radioButtons }
                   name="radio-button"
                   data-testid="ingredient-search-radio"
                   id="INGREDIENT"
@@ -110,7 +110,7 @@ function Header({ title, isRender, classes }) {
                 />
                 Ingrediente
               </label>
-              <label className={classes.radioButtons} htmlFor="NAME">
+              <label className={ classes.radioButtons } htmlFor="NAME">
                 <input
                   name="radio-button"
                   data-testid="name-search-radio"
@@ -122,7 +122,7 @@ function Header({ title, isRender, classes }) {
                 />
                 Nome
               </label>
-              <label className={classes.radioButtons} htmlFor="FIRST_LETTER">
+              <label className={ classes.radioButtons } htmlFor="FIRST_LETTER">
                 <input
                   name="radio-button"
                   data-testid="first-letter-search-radio"
@@ -135,9 +135,9 @@ function Header({ title, isRender, classes }) {
                 Primeira letra
               </label>
             </div>
-            <div className={classes.headerSearchButton}>
+            <div className={ classes.headerSearchButton }>
               <button
-                className={classes.headerSearchButton}
+                className={ classes.headerSearchButton }
                 data-testid="exec-search-btn"
                 type="button"
                 onClick={ onClickSearchButton }
@@ -153,6 +153,19 @@ function Header({ title, isRender, classes }) {
 }
 
 Header.propTypes = {
+  classes: PropTypes.shape({
+    headerProfilerContainer: PropTypes.string,
+    headerSearchButton: PropTypes.string,
+    headerSearchInṕutContainer: PropTypes.string,
+    headerSearchInput: PropTypes.string,
+    headerTitle: PropTypes.string,
+    headerTitleContainer: PropTypes.string,
+    profileIcon: PropTypes.string,
+    radioBtnsContainer: PropTypes.string,
+    radioButtons: PropTypes.string,
+    searchContainer: PropTypes.string,
+    searchIcon: PropTypes.string,
+  }).isRequired,
   isRender: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
 };

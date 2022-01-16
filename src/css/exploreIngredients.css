@@ -49,4 +49,5 @@ select {
     height: 40px;
     align-items: center;
     text-align: center;
+    border-radius: 10px;
 }
