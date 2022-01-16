@@ -94,27 +94,32 @@ function Buttons({ data }) {
   const id = gettingId(data);
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ addFavorites }
-      >
-        <img
-          src={ isFavorite() ? blackHeartIcon : whiteHeartIcon }
-          alt="blackHeartIcon"
-          data-testid="favorite-btn"
-        />
-      </button>
+    <div className="details-buttons-container">
+      <div className="details-fav-btn-container">
+        <button
+          type="button"
+          onClick={ addFavorites }
+        >
+          <img
+            src={ isFavorite() ? blackHeartIcon : whiteHeartIcon }
+            alt="blackHeartIcon"
+            data-testid="favorite-btn"
+          />
+        </button>
+      </div>
       { copied
         ? <span>Link copiado!</span>
         : (
-          <input
-            type="image"
-            src={ shareIcon }
-            alt="shareIcon"
-            data-testid="share-btn"
-            onClick={ () => copieLink(`${type}s/${id}`) }
-          />
+          <div className="details-share-btn-container">
+            <input
+              className="details-share-btn"
+              type="image"
+              src={ shareIcon }
+              alt="shareIcon"
+              data-testid="share-btn"
+              onClick={ () => copieLink(`${type}s/${id}`) }
+            />
+          </div>
         )}
     </div>
   );

@@ -24,3 +24,13 @@
     font-size: 40px;
     font-family: serif;
 } 
+
+.details-buttons-container {
+    display: flex;
+    justify-content: end;
+    transform: translate(-20px, -62px);
+}
+
+.details-fav-btn-container {
+    margin-right: 20px;
+}
