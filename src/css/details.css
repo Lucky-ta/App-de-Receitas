@@ -34,3 +34,30 @@
 .details-fav-btn-container {
     margin-right: 20px;
 }
+
+.details-fav-btn {
+    border: none;
+    /* overflow: hidden; */
+}
+
+.details-category {
+    transform: translate(35px, -45px);
+    font-family: sans-serif;
+    color: rgb(130, 135, 135);
+    font-size: 27px;
+}
+
+.details-ingredients-container {
+    display: block;
+    background-color: rgb(253, 255, 253);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.details-list {
+    font-size: 20px;
+    font-family: 'Roboto';
+}

@@ -42,3 +42,9 @@ code {
   flex-direction: column;
   text-align: center;
 }
+
+.meals-details-body {
+  background-image: none;
+  background-color: rgb(237, 235, 235);
+
+}

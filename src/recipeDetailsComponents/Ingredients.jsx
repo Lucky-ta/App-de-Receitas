@@ -3,9 +3,10 @@ import React from 'react';
 
 function Ingredients({ ingredients }) {
   return (
-    <div>
+    <div className="details-ingredients-container">
       {ingredients.map((ingredient, index) => ingredient !== false && (
         <ul
+          className="details-list"
           key={ index }
           data-testid={ `${index}-ingredient-name-and-measure` }
         >

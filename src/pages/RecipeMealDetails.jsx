@@ -123,10 +123,10 @@ function RecipeMealDetails({ match }) {
   };
 
   return (
-    <div>
+    <div className="meals-details-body">
       <ImageAndTitle img={ strMealThumb } title={ strMeal } />
       <Buttons data={ bundle } />
-      <h3 data-testid="recipe-category">{ strCategory }</h3>
+      <h3 className="details-category" data-testid="recipe-category">{ strCategory }</h3>
       <Ingredients ingredients={ concatArrays } />
       <h4 data-testid="instructions">{ strInstructions }</h4>
       <div data-testid="video">

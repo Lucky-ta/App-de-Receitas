@@ -99,6 +99,7 @@ function Buttons({ data }) {
         <button
           type="button"
           onClick={ addFavorites }
+          className="details-fav-btn"
         >
           <img
             src={ isFavorite() ? blackHeartIcon : whiteHeartIcon }
