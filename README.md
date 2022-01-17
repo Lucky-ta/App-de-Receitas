@@ -1,5 +1,9 @@
 # App de Receitas
 
+## _OBSERVAÇÕES:_
+  Todo o estilo da página foi desenvolvido para 
+  dispositivos móveis!!.
+
 ## _Descrição:_
   Este é um projeto de App de Receitas onde você começa fazendo login e após isso
   ja está livre para explorar as diversas receitas de comidas e bebidas, aplicando os
@@ -23,3 +27,4 @@ npm install
 npm start
 ```
 ou entre no link abaixo para visualizar o projeto funcionando:
+https://app-de-receitas-gyngq89qt-lucky-ta.vercel.app/
