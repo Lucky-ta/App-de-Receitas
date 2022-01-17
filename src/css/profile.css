@@ -7,12 +7,11 @@ body, html {
 }
 
 .user {
-  font-size: 30px;
-  color: white;
-  margin-top: 5%;
+  font-size: 27px;
+  color: rgb(238, 232, 232);
+  margin-right: 20px;
   text-align: center;
   font-family: sans-serif;
-  font-weight: 700;
   font-style: oblique;
 }
 
@@ -20,6 +19,7 @@ body, html {
   background-color: rgba(89, 66, 66, 0.241);
   margin-left: 15px;
   margin-right: 15px;
+  padding-left: 20px;
 }
 
 .user-options {

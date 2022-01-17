@@ -17,7 +17,7 @@
 .details-title-container {
     display: flex;
     margin-bottom: 20px;
-    margin-left: 8px;
+    margin-left: 20px;
     margin-top: 20px;
     margin-right: 85px;
 }
@@ -44,16 +44,18 @@
 }
 
 .details-category {
-    transform: translate(35px, -45px);
+    transform: translate(4px, -45px);
     font-family: sans-serif;
     color: rgb(130, 135, 135);
-    font-size: 27px;
-    margin-left: 10px;
+    font-size: 23px;
+    margin-left: 20px;
+    /* margin-left: 10px; */
 }
 
 .details-ingredients-container {
     display: block;
-    background-color: rgba(245, 244, 244, 0.631);
+    background-color: rgb(231, 231, 233);
+
 
     padding-top: 10px;
     padding-bottom: 10px;
@@ -71,7 +73,8 @@
 
 .details-video-container {
     display: block;
-    background-color: rgba(245, 244, 244, 0.631);
+    background-color: rgb(231, 231, 233);
+
 
 
     padding-top: 10px;
@@ -115,7 +118,7 @@
   
   .meals-details-body {
     background-image: none;
-    background-color: rgb(253, 255, 253);
+    background-color: rgba(243, 243, 242);
 
   
   }

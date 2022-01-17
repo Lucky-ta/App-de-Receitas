@@ -76,7 +76,10 @@ function RecipesDone() {
             </p>)}
               <div>
                 <Link to={ `${recipe.type}s/${recipe.id}` }>
-                  <h3 className="done-recipe-title" data-testid={ `${index}-horizontal-name` }>
+                  <h3
+                    className="done-recipe-title"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
                     {recipe.name}
                   </h3>
                 </Link>

@@ -1,16 +1,11 @@
 
-.done-recipes-body {
-  /* background-color: rgba(140, 46, 46); */
-
-}
-
 .done-recipes-container {
     display: block;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 50px;
     margin-bottom: 40px;
-    color: rgb(238, 233, 223);
+    background-color: rgb(253, 255, 253);
 }
 
 .done-recipe-card-container {
