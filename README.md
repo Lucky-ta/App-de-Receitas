@@ -27,4 +27,4 @@ npm install
 npm start
 ```
 ou entre no link abaixo para visualizar o projeto funcionando:
-https://app-de-receitas-gyngq89qt-lucky-ta.vercel.app/
+https://app-de-receitas-theta.vercel.app/
