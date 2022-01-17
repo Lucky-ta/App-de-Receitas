@@ -63,7 +63,7 @@ function InProgressMeal({ recipe, url }) {
   return (
     <div className="progress-body">
       <main>
-        <ImageAndTitle img={ recipe.strMealThumb } title={ recipe.strMeal } />
+        <ImageAndTitle img={ recipe.strDrinkThumb } title={ recipe.strDrink } />
         <span
           className="details-category"
           data-testid="recipe-category"
@@ -71,7 +71,7 @@ function InProgressMeal({ recipe, url }) {
           {recipe.strCategory}
         </span>
         <div className="details-buttons-container">
-          <div>
+          <div className="details-fav-btn-container">
             <input
               type="image"
               src={ isFavorite() ? blackHeartIcon : whiteHeartIcon }
@@ -106,7 +106,7 @@ function InProgressMeal({ recipe, url }) {
                   ingredientsUsed={ ingredientsUsed }
                   setIngredientsUsed={ setIngredientsUsed }
                   checked={ ingredientsUsed.some((ingUsed) => ingUsed === ingredient) }
-                  id={ recipe.idMeal }
+                  id={ recipe.idDrink }
                 />
               </div>
             ))}
