@@ -1,0 +1,35 @@
+
+.done-recipes-body {
+  /* background-color: rgba(140, 46, 46); */
+
+}
+
+.done-recipes-container {
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    color: rgb(238, 233, 223);
+}
+
+.done-recipe-card-container {
+    display: block;
+    margin-bottom: 20px;
+    align-items: center;
+    background-color: rgba(84, 79, 79, 0.623);
+    border-radius: 19px;
+    text-align: center;
+}
+
+.done-recipe-img {
+    margin-top: 15px;
+    border-radius: 100px;
+}
+
+.done-recipe-title {
+    font-size: 24px;
+    align-self: flex-end; 
+    color: wheat;
+
+}
