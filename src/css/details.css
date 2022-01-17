@@ -49,7 +49,6 @@
     color: rgb(130, 135, 135);
     font-size: 23px;
     margin-left: 20px;
-    /* margin-left: 10px; */
 }
 
 .details-ingredients-container {
@@ -74,15 +73,11 @@
 .details-video-container {
     display: block;
     background-color: rgb(231, 231, 233);
-
-
-
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 25px;
     margin: 10px;
     border-radius: 8px;
-    /* align-items: center; */
 }
 
 .details-video {
