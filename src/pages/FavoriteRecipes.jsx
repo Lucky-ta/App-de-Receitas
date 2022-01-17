@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import { INTERVAL } from '../global/constants';
+import '../css/doneRecipes.css';
 
 const classObject = {
   headerProfilerContainer: 'profile-header header-profile-container',
@@ -52,58 +53,64 @@ function FavoriteRecipes() {
   }
 
   return (
-    <div>
+    <div className="done-recipes-body">
       <Header title="Receitas Favoritas" isRender={ false } classes={ classObject } />
       <FilterHeader setFilterType={ setFilterType } />
-      {favRecipes
-        .filter((recipe) => recipe.type.includes(filterType))
-        .map((recipe, index) => (
-          <div key={ recipe.id }>
-            <Link to={ `${recipe.type}s/${recipe.id}` }>
-              <img
-                width="150px"
-                data-testid={ `${index}-horizontal-image` }
-                src={ recipe.image }
-                alt={ recipe.name }
-              />
-            </Link>
-            {recipe.type === 'comida'
+      <div className="done-recipes-container">
+        {favRecipes
+          .filter((recipe) => recipe.type.includes(filterType))
+          .map((recipe, index) => (
+            <div className="done-recipe-card-container" key={ recipe.id }>
+              <Link to={ `${recipe.type}s/${recipe.id}` }>
+                <img
+                  className="done-recipe-img"
+                  width="150px"
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                />
+              </Link>
+              {recipe.type === 'comida'
           && (
             <p data-testid={ `${index}-horizontal-top-text` }>
               {`${recipe.area} - ${recipe.category}`}
             </p>)}
-            {recipe.type === 'bebida'
+              {recipe.type === 'bebida'
           && (
             <p data-testid={ `${index}-horizontal-top-text` }>
               {`${recipe.alcoholicOrNot}`}
             </p>)}
-            <Link to={ `${recipe.type}s/${recipe.id}` }>
-              <h3 data-testid={ `${index}-horizontal-name` }>
-                {recipe.name}
-              </h3>
-            </Link>
-            {copied
-              ? <span>Link copiado!</span>
-              : (
-                <input
-                  type="image"
-                  src={ shareIcon }
-                  alt="shareIcon"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  onClick={ () => copieLink(`${recipe.type}s/${recipe.id}`) }
-                />
-              )}
-            <input
-              type="image"
-              src={ blackHeartIcon }
-              alt="blackHeartIcon"
-              onClick={ () => {
-                unfavoriteRecipe(recipe);
-                setAuxRender(!auxRender);
-              } }
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />
-          </div>))}
+              <Link to={ `${recipe.type}s/${recipe.id}` }>
+                <h3
+                  className="done-recipe-title"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  {recipe.name}
+                </h3>
+              </Link>
+              {copied
+                ? <span>Link copiado!</span>
+                : (
+                  <input
+                    type="image"
+                    src={ shareIcon }
+                    alt="shareIcon"
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    onClick={ () => copieLink(`${recipe.type}s/${recipe.id}`) }
+                  />
+                )}
+              <input
+                type="image"
+                src={ blackHeartIcon }
+                alt="blackHeartIcon"
+                onClick={ () => {
+                  unfavoriteRecipe(recipe);
+                  setAuxRender(!auxRender);
+                } }
+                data-testid={ `${index}-horizontal-favorite-btn` }
+              />
+            </div>))}
+      </div>
     </div>
   );
 }

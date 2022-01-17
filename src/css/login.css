@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Rouge+Script&display=swap');
 
 body {
-  height: 100%;
-
     background-image: url("../images/recipes.jpg");
     background-repeat: no-repeat;
     background-position-x: 30%;
@@ -20,6 +18,7 @@ body {
     transform: translate(-20px, 150px);
     text-align: center;
     background-color: rgba(220, 220, 220, 0.20);
+    margin-bottom: 200px;
   }
    
 .login-btn {
