@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import '../css/inProgress.css';
 
 function IngredientsCards({ ingredient, index,
   ingredientsUsed, setIngredientsUsed, id }) {
@@ -31,6 +32,7 @@ function IngredientsCards({ ingredient, index,
       data-testid={ `${index}-ingredient-step` }
     >
       <input
+        className="radio-progress"
         type="checkbox"
         id={ `${index}-${ingredient}` }
         checked={ test && test.some((ingUsed) => ingUsed === ingredient) }

@@ -1,0 +1,58 @@
+.progress-body {
+    background-color: rgb(253, 255, 253);
+    background-image: none;
+}
+
+.progress-ingredients-container {
+    display: block;
+    margin-top: 20px;
+}
+
+.ingredient-progress-title {
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.ingredients-progress {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 25px;
+}
+
+.ingredients-progress-cards {
+    margin-bottom: 3px;
+    background-color: rgb(231, 231, 233);
+    border-radius: 13px;
+}
+
+.instructions-progress-container {
+    display: block;
+    background-color: rgb(231, 231, 233);
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.instructions-progress {
+    font-family: 'Roboto';
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.radio-progress {
+    width: 30px;
+    height: 18px;
+    margin-top: 10px;
+}
+
+.finish-recipe-progress-btn {
+    border-radius: 8px;
+    align-items: center;
+    margin-left: 108px;
+    margin-bottom: 25px;
+    height: 30px;
+}

@@ -7,6 +7,8 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import IngredientsCards from '../cards/IngredientsCards';
+import ImageAndTitle from '../recipeDetailsComponents/ImageAndTitle';
+import '../css/inProgress.css';
 
 function InProgressMeal({ recipe, url }) {
   const [copied, setCopied] = useState(false);
@@ -59,66 +61,69 @@ function InProgressMeal({ recipe, url }) {
   }
 
   return (
-    <main>
-      <img
-        data-testid="recipe-photo"
-        width="200px"
-        src={ recipe.strMealThumb }
-        alt={ recipe.srtMeal }
-      />
-      <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-      <span data-testid="recipe-category">{recipe.strCategory}</span>
-      {copied
-        ? <span>Link copiado!</span>
-        : (
-          <input
-            type="image"
-            src={ shareIcon }
-            alt="shareIcon"
-            data-testid="share-btn"
-            onClick={ () => copieLink(url) }
-          />
-        )}
-      {isFavorite()
-        ? (
-          <input
-            type="image"
-            src={ blackHeartIcon }
-            alt="blackHeartIcon"
-            onClick={ () => {} }
-            data-testid="favorite-btn"
-          />)
-        : (
-          <input
-            type="image"
-            src={ whiteHeartIcon }
-            alt="whiteHeartIcon"
-            // onClick={}
-            data-testid="favorite-btn"
-          />
-        )}
-      <div>
-        <h3>Ingredientes</h3>
-        {getIngredient(recipe).map((ingredient, index) => (
-          <IngredientsCards
-            key={ `${index}-${ingredient}` }
-            ingredient={ ingredient }
-            index={ index }
-            ingredientsUsed={ ingredientsUsed }
-            setIngredientsUsed={ setIngredientsUsed }
-            checked={ ingredientsUsed.some((ingUsed) => ingUsed === ingredient) }
-            id={ recipe.idMeal }
-          />
-        ))}
-      </div>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-      >
-        Finalizar Receita
-      </button>
-    </main>
+    <div className="progress-body">
+      <main>
+        <ImageAndTitle img={ recipe.strMealThumb } title={ recipe.strMeal } />
+        <span data-testid="recipe-category">{recipe.strCategory}</span>
+        <div className="details-buttons-container">
+          <div>
+            <input
+              type="image"
+              src={ isFavorite() ? blackHeartIcon : whiteHeartIcon }
+              alt="blackHeartIcon"
+              onClick={ () => {} }
+              data-testid="favorite-btn"
+            />
+          </div>
+          {copied
+            ? <span>Link copiado!</span>
+            : (
+              <input
+                type="image"
+                src={ shareIcon }
+                alt="shareIcon"
+                data-testid="share-btn"
+                onClick={ () => copieLink(url) }
+              />
+            )}
+        </div>
+        <div className="progress-ingredients-container">
+          <h3 className="ingredient-progress-title">Ingredientes</h3>
+          <div className="ingredients-progress">
+            {getIngredient(recipe).map((ingredient, index) => (
+              <div className="ingredients-progress-cards" key={ `${index}-${ingredient}` }>
+                <IngredientsCards
+                  ingredient={ ingredient }
+                  index={ index }
+                  ingredientsUsed={ ingredientsUsed }
+                  setIngredientsUsed={ setIngredientsUsed }
+                  checked={ ingredientsUsed.some((ingUsed) => ingUsed === ingredient) }
+                  id={ recipe.idMeal }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <h3 className="ingredient-progress-title">Instructions</h3>
+        <div className="instructions-progress-container">
+          <div className="instructions-progress-text">
+            <p
+              className="instructions-progress"
+              data-testid="instructions"
+            >
+              {recipe.strInstructions}
+            </p>
+          </div>
+        </div>
+        <button
+          className="finish-recipe-progress-btn"
+          type="button"
+          data-testid="finish-recipe-btn"
+        >
+          Finalizar Receita
+        </button>
+      </main>
+    </div>
   );
 }
 
